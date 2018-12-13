@@ -1,0 +1,10 @@
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.exe.config
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.exe
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.pdb
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Login.resources
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Properties.Resources.resources
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Register.resources
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csproj.GenerateResource.cache
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csproj.CoreCompileInputs.cache
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.exe
+C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.pdb
