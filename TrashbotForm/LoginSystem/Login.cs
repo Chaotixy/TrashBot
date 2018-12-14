@@ -12,8 +12,11 @@ using System.Threading;
 
 namespace LoginSystem
 {
+   
+
     public partial class Login : Form
     {
+
         public Login()
         {
             InitializeComponent();
@@ -21,7 +24,7 @@ namespace LoginSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
         }
 
         private void textBox1_Click(object sender, EventArgs e)

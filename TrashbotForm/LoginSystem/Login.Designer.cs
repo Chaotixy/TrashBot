@@ -35,12 +35,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.piclock = new System.Windows.Forms.PictureBox();
-            this.picperson = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Exit = new System.Windows.Forms.Button();
             this.userErr = new System.Windows.Forms.Label();
             this.passErr = new System.Windows.Forms.Label();
+            this.piclock = new System.Windows.Forms.PictureBox();
+            this.picperson = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picperson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -119,33 +119,6 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // piclock
-            // 
-            this.piclock.Image = global::LoginSystem.Properties.Resources.lock1;
-            this.piclock.Location = new System.Drawing.Point(60, 231);
-            this.piclock.Name = "piclock";
-            this.piclock.Size = new System.Drawing.Size(20, 20);
-            this.piclock.TabIndex = 12;
-            this.piclock.TabStop = false;
-            // 
-            // picperson
-            // 
-            this.picperson.Image = global::LoginSystem.Properties.Resources.person1;
-            this.picperson.Location = new System.Drawing.Point(60, 161);
-            this.picperson.Name = "picperson";
-            this.picperson.Size = new System.Drawing.Size(20, 20);
-            this.picperson.TabIndex = 11;
-            this.picperson.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(142, 60);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
             // Exit
             // 
             this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
@@ -181,6 +154,33 @@
             this.passErr.Size = new System.Drawing.Size(0, 16);
             this.passErr.TabIndex = 15;
             // 
+            // piclock
+            // 
+            this.piclock.Image = global::LoginSystem.Properties.Resources.lock1;
+            this.piclock.Location = new System.Drawing.Point(60, 231);
+            this.piclock.Name = "piclock";
+            this.piclock.Size = new System.Drawing.Size(20, 20);
+            this.piclock.TabIndex = 12;
+            this.piclock.TabStop = false;
+            // 
+            // picperson
+            // 
+            this.picperson.Image = global::LoginSystem.Properties.Resources.person1;
+            this.picperson.Location = new System.Drawing.Point(60, 161);
+            this.picperson.Name = "picperson";
+            this.picperson.Size = new System.Drawing.Size(20, 20);
+            this.picperson.TabIndex = 11;
+            this.picperson.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(142, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -200,9 +200,10 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picperson)).EndInit();
