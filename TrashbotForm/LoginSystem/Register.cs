@@ -20,7 +20,7 @@ namespace LoginSystem
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace LoginSystem
 
         private void Register_Load(object sender, EventArgs e)
         {
-
+            this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -146,7 +146,7 @@ namespace LoginSystem
 
 
 
-        // Checking after the registration button is clicked if the field has been filled in.
+        // Checking after the next step button is clicked if the field has been filled in.
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -242,7 +242,14 @@ namespace LoginSystem
                 emailErr.Text = "* Please fill in your email";
                 passErr.Text = "* Please create a password";
             }
-            
+
+            if (!(boxUser.Text == "" || boxUser.Text == "Pick a username") && !(boxEmail.Text == "" || boxEmail.Text == "You@example.com") && !(boxPass.Text == "" || boxPass.Text == "Create a password"))
+            {
+                this.Hide();
+                Register2 next = new Register2();
+                next.Show();
+            }
+
         }
     }
 }
