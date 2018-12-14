@@ -19,9 +19,9 @@ namespace TrashbotForm
             InitializeComponent();
             map.MapProvider = GMapProviders.GoogleMap;
             map.Position = new PointLatLng(52.786435, 6.8894953);
-            map.MinZoom = 5;
-            map.MaxZoom = 1000;
-            map.Zoom = 500; //current zoom
+            map.MinZoom = 1;
+            map.MaxZoom = 25;
+            map.Zoom = 18; //current zoom
             map.MouseWheelZoomEnabled = true;
             map.DragButton = MouseButtons.Left;
 

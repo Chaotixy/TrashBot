@@ -1,0 +1,14 @@
+
+*.cache
+*.sqlite
+*.sqlite-journal
+*.sqlite
+.vs/TrashBot/v15/.suo
+TrashbotForm/.vs/TrashbotForm/v15/.suo
+*.ide-shm
+*.ide-wal
+*.sqlite
+.vs/TrashBot/v15/.suo
+*.cache
+*.pdb
+*.exe
