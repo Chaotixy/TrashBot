@@ -79,10 +79,10 @@ namespace LoginSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            Register registration = new Register();
+            registration.Hide();
             Login login = new Login();
             login.Show();
-            Environment.Exit(0);
         }
 
         private void boxEmail_Click_1(object sender, EventArgs e)

@@ -19,7 +19,7 @@ namespace LoginSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void textBox1_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace LoginSystem
                 this.textBox2.PasswordChar = char.MinValue;
                 textBox2.Text = "Password";
             }
-            
+
 
         }
 
@@ -62,10 +62,10 @@ namespace LoginSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            Login login = new Login();
+            login.Hide();
             Register registration = new Register();
             registration.Show();
-            
         }
     }
 }
