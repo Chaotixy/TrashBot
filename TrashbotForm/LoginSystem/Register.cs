@@ -35,7 +35,10 @@ namespace LoginSystem
 
         private void boxUser_Click(object sender, EventArgs e)
         {
-            boxUser.Clear();
+            if (boxUser.Text == "" || boxUser.Text == "Pick a username")
+            {
+                boxUser.Clear();
+            }
             picuser.Image = Properties.Resources.person2;
             panel1.BackColor = Color.FromArgb(216, 191, 170);
             boxUser.ForeColor = Color.FromArgb(216, 191, 170);
@@ -55,14 +58,17 @@ namespace LoginSystem
             }
             if (boxEmail.Text == "")
             { 
-                boxEmail.Text = "you@example.com";
+                boxEmail.Text = "You@example.com";
             }
         }
 
 
         private void boxPass_Click_1(object sender, EventArgs e)
         {
-            boxPass.Clear();
+            if (boxPass.Text == "" || boxPass.Text == "Create a password")
+            {
+                boxPass.Clear();
+            }
             boxPass.PasswordChar = '•';
             piclock.Image = Properties.Resources.lock2;
             panel3.BackColor = Color.FromArgb(216, 191, 170);
@@ -77,6 +83,14 @@ namespace LoginSystem
             boxEmail.ForeColor = Color.White;
 
 
+            if (boxUser.Text == "")
+            {
+                boxUser.Text = "Pick a username";
+            }
+            if (boxEmail.Text == "")
+            {
+                boxEmail.Text = "You@example.com";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -88,7 +102,10 @@ namespace LoginSystem
 
         private void boxEmail_Click_1(object sender, EventArgs e)
         {
-            boxEmail.Clear();
+            if (boxEmail.Text == "" || boxEmail.Text == "You@example.com")
+            {
+                boxEmail.Clear();
+            }
             picemail.Image = Properties.Resources.email2;
             panel2.BackColor = Color.FromArgb(216, 191, 170);
             boxEmail.ForeColor = Color.FromArgb(216, 191, 170);
@@ -100,6 +117,16 @@ namespace LoginSystem
             piclock.Image = Properties.Resources.lock1;
             panel3.BackColor = Color.White;
             boxPass.ForeColor = Color.White;
+
+            if (boxPass.Text == "")
+            {
+                this.boxPass.PasswordChar = char.MinValue;
+                boxPass.Text = "Create a password";
+            }
+            if (boxUser.Text == "")
+            {
+                boxUser.Text = "Pick a username";
+            }
 
 
         }
@@ -115,6 +142,107 @@ namespace LoginSystem
             {
                 process.Kill();
             }
+        }
+
+
+
+        // Checking after the registration button is clicked if the field has been filled in.
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+
+            if (boxUser.Text == "" || boxUser.Text == "Pick a username")
+            {
+                userErr.Text = "* Please pick a username";
+
+                if(boxEmail.Text == "" || boxEmail.Text == "You@example.com")
+                {
+                    emailErr.Text = "* Please fill in your email";
+                }
+                else {
+                    emailErr.Text = "";
+                     }
+
+                if (boxPass.Text == "" || boxPass.Text == "Create a password")
+                {
+                    passErr.Text = "* Please create a password";
+
+                }
+                else
+                {
+                    passErr.Text = "";
+                }
+
+
+            }
+            else
+            {
+                userErr.Text = "";
+            }
+
+            if (boxEmail.Text == "" || boxEmail.Text == "You@example.com")
+            {
+                emailErr.Text = "* Please fill in your email";
+
+                if (boxUser.Text == "" || boxUser.Text == "Pick a username")
+                {
+                    userErr.Text = "* Please pick a username";
+                }
+                else
+                {
+                    userErr.Text = "";
+                }
+
+                if (boxPass.Text == "" || boxPass.Text == "Create a password")
+                {
+                    passErr.Text = "* Please create a password";
+
+                }
+                else
+                {
+                    passErr.Text = "";
+                }
+
+
+            }
+            else {
+                emailErr.Text = "";
+            }
+
+            if (boxPass.Text == "" || boxPass.Text == "Create a password")
+            {
+                passErr.Text = "* Please create a password";
+
+                if (boxUser.Text == "" || boxUser.Text == "Pick a username")
+                {
+                    userErr.Text = "* Please pick a username";
+                }
+                else
+                {
+                    userErr.Text = "";
+                }
+
+                if (boxEmail.Text == "" || boxEmail.Text == "You@example.com")
+                {
+                    emailErr.Text = "* Please fill in your email";
+                }
+                else
+                {
+                    emailErr.Text = "";
+                }
+            }
+            else
+            {
+                passErr.Text = "";
+            }
+
+            if ((boxUser.Text == "" || boxUser.Text == "Pick a username") && (boxEmail.Text == "" || boxEmail.Text == "You@example.com") && (boxPass.Text == "" || boxPass.Text == "Create a password"))
+            {
+                userErr.Text = "* Please pick a username";
+                emailErr.Text = "* Please fill in your email";
+                passErr.Text = "* Please create a password";
+            }
+            
         }
     }
 }
