@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
+using System.Threading;
 
 namespace LoginSystem
 {
@@ -62,10 +64,19 @@ namespace LoginSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Login login = new Login();
-            login.Hide();
+            this.Hide();
             Register registration = new Register();
             registration.Show();
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+
+            foreach (var process in Process.GetProcessesByName("LoginSystem"))
+            {
+                process.Kill();
+            }
+
         }
     }
 }
