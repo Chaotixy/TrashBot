@@ -62,9 +62,10 @@ namespace LoginSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Environment.Exit(0);
             Register registration = new Register();
             registration.Show();
+            
         }
     }
 }
