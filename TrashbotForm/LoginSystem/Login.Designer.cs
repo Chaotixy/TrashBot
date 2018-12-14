@@ -38,6 +38,7 @@
             this.piclock = new System.Windows.Forms.PictureBox();
             this.picperson = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picperson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -142,12 +143,28 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // Exit
+            // 
+            this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
+            this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.Exit.Location = new System.Drawing.Point(293, -1);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(45, 35);
+            this.Exit.TabIndex = 13;
+            this.Exit.Text = "X";
+            this.Exit.UseCompatibleTextRendering = true;
+            this.Exit.UseVisualStyleBackColor = false;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(337, 503);
+            this.Controls.Add(this.Exit);
             this.Controls.Add(this.piclock);
             this.Controls.Add(this.picperson);
             this.Controls.Add(this.button2);
@@ -182,6 +199,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox picperson;
         private System.Windows.Forms.PictureBox piclock;
+        private System.Windows.Forms.Button Exit;
     }
 }
 

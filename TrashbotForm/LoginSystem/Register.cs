@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,6 +63,7 @@ namespace LoginSystem
         private void boxPass_Click_1(object sender, EventArgs e)
         {
             boxPass.Clear();
+            boxPass.PasswordChar = '•';
             piclock.Image = Properties.Resources.lock2;
             panel3.BackColor = Color.FromArgb(216, 191, 170);
             boxPass.ForeColor = Color.FromArgb(216, 191, 170);
@@ -79,8 +81,7 @@ namespace LoginSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Register registration = new Register();
-            registration.Hide();
+            this.Hide();
             Login login = new Login();
             login.Show();
         }
@@ -106,6 +107,14 @@ namespace LoginSystem
         private void Register_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            foreach (var process in Process.GetProcessesByName("LoginSystem"))
+            {
+                process.Kill();
+            }
         }
     }
 }
