@@ -3,14 +3,11 @@
 #include <Wire.h>
 #define trigPin 13
 #define echoPin 12
-#define led 11
-#define led2 10
 #define leftWheelUp 3
 #define leftWheelDown 2
 #define rightWheelUp 9
 #define rightWheelDown 4
-#define LS 11 //left sensor
-#define RS 10 //Right sensor
+
 
 
 
@@ -52,10 +49,6 @@ void setup() {
   
   pinMode(trigPin, OUTPUT); //ultrasonic sound sensor
   pinMode(echoPin, INPUT);
-  pinMode(led, OUTPUT); 
-  pinMode(led2, OUTPUT);
-  pinMode(LS, INPUT); //left sensor
-  pinMode(RS, INPUT); // right sensor
   //mpu.initialize();
   //gyro
   
@@ -107,22 +100,7 @@ void breaks() {
   digitalWrite(rightWheelUp, LOW);
   digitalWrite(rightWheelDown, LOW);
 }
-//linefollow function
-void lineFollow() {
-    if(!(digitalRead(LS)) && !(digitalRead(RS))) { //forward
-    forward();
-    } 
-    if(digitalRead(LS) && !(digitalRead(RS))) {//right
-    left();
-    }
-    if(!(digitalRead(LS)) && digitalRead(RS)) { //left 
-    right();
-    }
-    if(digitalRead(LS) && digitalRead(RS)) { //breaks 
-    breaks();
-    }
-    
-  }
+
 
  
 //function to move to the next game
