@@ -93,7 +93,7 @@
             this.Exit.Location = new System.Drawing.Point(293, -1);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(45, 35);
-            this.Exit.TabIndex = 42;
+            this.Exit.TabIndex = 5;
             this.Exit.Text = "X";
             this.Exit.UseCompatibleTextRendering = true;
             this.Exit.UseVisualStyleBackColor = false;
@@ -132,7 +132,7 @@
             this.boxCity.Location = new System.Drawing.Point(81, 293);
             this.boxCity.Name = "boxCity";
             this.boxCity.Size = new System.Drawing.Size(161, 15);
-            this.boxCity.TabIndex = 38;
+            this.boxCity.TabIndex = 2;
             this.boxCity.Text = "Enter city";
             this.boxCity.Click += new System.EventHandler(this.boxCity_Click);
             // 
@@ -145,7 +145,7 @@
             this.boxAddress.Location = new System.Drawing.Point(81, 211);
             this.boxAddress.Name = "boxAddress";
             this.boxAddress.Size = new System.Drawing.Size(161, 15);
-            this.boxAddress.TabIndex = 37;
+            this.boxAddress.TabIndex = 1;
             this.boxAddress.Text = "Enter address";
             this.boxAddress.Click += new System.EventHandler(this.boxAddress_Click);
             // 
@@ -187,7 +187,7 @@
             this.button2.Location = new System.Drawing.Point(54, 409);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(230, 35);
-            this.button2.TabIndex = 33;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Step back";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -202,7 +202,7 @@
             this.button1.Location = new System.Drawing.Point(54, 351);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(230, 35);
-            this.button1.TabIndex = 31;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Register";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -239,7 +239,7 @@
             this.boxUser.Location = new System.Drawing.Point(81, 130);
             this.boxUser.Name = "boxUser";
             this.boxUser.Size = new System.Drawing.Size(161, 15);
-            this.boxUser.TabIndex = 28;
+            this.boxUser.TabIndex = 0;
             this.boxUser.Text = "Enter full name";
             this.boxUser.Click += new System.EventHandler(this.boxUser_Click);
             // 

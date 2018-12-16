@@ -76,7 +76,7 @@
             this.boxUser.Location = new System.Drawing.Point(81, 130);
             this.boxUser.Name = "boxUser";
             this.boxUser.Size = new System.Drawing.Size(161, 15);
-            this.boxUser.TabIndex = 7;
+            this.boxUser.TabIndex = 0;
             this.boxUser.Text = "Pick a username";
             this.boxUser.Click += new System.EventHandler(this.boxUser_Click);
             // 
@@ -112,7 +112,7 @@
             this.button1.Location = new System.Drawing.Point(54, 351);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(230, 35);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Next step";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -138,7 +138,7 @@
             this.button2.Location = new System.Drawing.Point(54, 428);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(230, 35);
-            this.button2.TabIndex = 14;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Log in";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -152,7 +152,7 @@
             this.boxEmail.Location = new System.Drawing.Point(81, 211);
             this.boxEmail.Name = "boxEmail";
             this.boxEmail.Size = new System.Drawing.Size(161, 15);
-            this.boxEmail.TabIndex = 18;
+            this.boxEmail.TabIndex = 1;
             this.boxEmail.Text = "You@example.com";
             this.boxEmail.Click += new System.EventHandler(this.boxEmail_Click_1);
             // 
@@ -165,7 +165,7 @@
             this.boxPass.Location = new System.Drawing.Point(81, 293);
             this.boxPass.Name = "boxPass";
             this.boxPass.Size = new System.Drawing.Size(161, 15);
-            this.boxPass.TabIndex = 19;
+            this.boxPass.TabIndex = 2;
             this.boxPass.Text = "Create a password";
             this.boxPass.Click += new System.EventHandler(this.boxPass_Click_1);
             // 
@@ -238,7 +238,7 @@
             this.Exit.Location = new System.Drawing.Point(293, -1);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(45, 35);
-            this.Exit.TabIndex = 22;
+            this.Exit.TabIndex = 5;
             this.Exit.Text = "X";
             this.Exit.UseCompatibleTextRendering = true;
             this.Exit.UseVisualStyleBackColor = false;
