@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace LoginSystem
 {
@@ -17,6 +18,13 @@ namespace LoginSystem
         {
             InitializeComponent();
         }
+
+        // Makes application icon bigger in taskbar.
+        private void Register_Load(object sender, EventArgs e)
+        {
+            this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
+        }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -33,6 +41,7 @@ namespace LoginSystem
 
         }
 
+        // Styling for when you click the add-username box.
         private void boxUser_Click(object sender, EventArgs e)
         {
             if (boxUser.Text == "" || boxUser.Text == "Pick a username")
@@ -60,9 +69,10 @@ namespace LoginSystem
             { 
                 boxEmail.Text = "You@example.com";
             }
+
         }
 
-
+        // Styling for when you click add-password box.
         private void boxPass_Click_1(object sender, EventArgs e)
         {
             if (boxPass.Text == "" || boxPass.Text == "Create a password")
@@ -93,13 +103,8 @@ namespace LoginSystem
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Login login = new Login();
-            login.Show();
-        }
-
+       
+        // Styling for when you click the add-email button.
         private void boxEmail_Click_1(object sender, EventArgs e)
         {
             if (boxEmail.Text == "" || boxEmail.Text == "You@example.com")
@@ -131,20 +136,6 @@ namespace LoginSystem
 
         }
 
-        private void Register_Load(object sender, EventArgs e)
-        {
-            this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
-        }
-
-        private void Exit_Click(object sender, EventArgs e)
-        {
-            foreach (var process in Process.GetProcessesByName("LoginSystem"))
-            {
-                process.Kill();
-            }
-        }
-
-
 
         // Checking after the next step button is clicked if the field has been filled in.
         private void button1_Click(object sender, EventArgs e)
@@ -168,6 +159,20 @@ namespace LoginSystem
                     passErr.Text = "* Please create a password";
 
                 }
+
+                if (!(boxEmail.Text == "" || boxEmail.Text == "You@example.com"))
+                {
+                    try
+                    {
+                        var validate = new MailAddress(boxEmail.Text);
+                    }
+                    catch 
+                    {
+                        emailErr.Text = "Wrong email format";
+                    }
+                }
+
+
                 else
                 {
                     passErr.Text = "";
@@ -201,6 +206,19 @@ namespace LoginSystem
                 else
                 {
                     passErr.Text = "";
+
+
+                    if (!(boxEmail.Text == "" || boxEmail.Text == "You@example.com"))
+                    {
+                        try
+                        {
+                            var validate = new MailAddress(boxEmail.Text);
+                        }
+                        catch
+                        {
+                            emailErr.Text = "Wrong email format";
+                        }
+                    }
                 }
 
 
@@ -226,6 +244,20 @@ namespace LoginSystem
                 {
                     emailErr.Text = "* Please fill in your email";
                 }
+
+
+                if (!(boxEmail.Text == "" || boxEmail.Text == "You@example.com"))
+                {
+                    try
+                    {
+                        var validate = new MailAddress(boxEmail.Text);
+                    }
+                    catch
+                    {
+                        emailErr.Text = "Wrong email format";
+                    }
+                }
+
                 else
                 {
                     emailErr.Text = "";
@@ -245,11 +277,43 @@ namespace LoginSystem
 
             if (!(boxUser.Text == "" || boxUser.Text == "Pick a username") && !(boxEmail.Text == "" || boxEmail.Text == "You@example.com") && !(boxPass.Text == "" || boxPass.Text == "Create a password"))
             {
-                this.Hide();
-                Register2 next = new Register2();
-                next.Show();
+                // Checks if the email that is filled in is actually an email before you can go to next step.
+                if (!(boxEmail.Text == "" || boxEmail.Text == "You@example.com"))
+                {
+                    try
+                    {
+                        var validate = new MailAddress(boxEmail.Text);
+                        this.Hide();
+                        Register2 next = new Register2();
+                        next.Show();
+                    }
+                    catch
+                    {
+                        emailErr.Text = "Wrong email format";
+                    }
+                }
+
+               
             }
 
         }
+
+        // When you click login button it will take you to login page.
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
+        }
+
+        // When you hit the X, it will kill the process to avoid problems. 
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            foreach (var process in Process.GetProcessesByName("LoginSystem"))
+            {
+                process.Kill();
+            }
+        }
+
     }
 }

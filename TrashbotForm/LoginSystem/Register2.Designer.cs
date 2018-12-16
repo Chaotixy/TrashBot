@@ -42,7 +42,6 @@
             this.piccity = new System.Windows.Forms.PictureBox();
             this.picuser = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -185,23 +184,13 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
-            this.button2.Location = new System.Drawing.Point(54, 428);
+            this.button2.Location = new System.Drawing.Point(54, 409);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(230, 35);
             this.button2.TabIndex = 33;
-            this.button2.Text = "Log in";
+            this.button2.Text = "Step back";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label4.Location = new System.Drawing.Point(61, 399);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(132, 13);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Already have an account?";
             // 
             // button1
             // 
@@ -294,7 +283,6 @@
             this.Controls.Add(this.piccity);
             this.Controls.Add(this.picuser);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -332,7 +320,6 @@
         private System.Windows.Forms.PictureBox piccity;
         private System.Windows.Forms.PictureBox picuser;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

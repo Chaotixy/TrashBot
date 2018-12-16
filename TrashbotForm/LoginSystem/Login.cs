@@ -22,11 +22,13 @@ namespace LoginSystem
             InitializeComponent();
         }
 
+        // Makes application icon bigger in taskbar.
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
         }
 
+        // Styling for when you click the username box.
         private void textBox1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "" || textBox1.Text == "Username")
@@ -50,6 +52,7 @@ namespace LoginSystem
 
         }
 
+        // Styling for when you click the password box.
         private void textBox2_Click(object sender, EventArgs e)
         {
             if (textBox2.Text == "" || textBox2.Text == "Password")
@@ -71,23 +74,7 @@ namespace LoginSystem
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Register registration = new Register();
-            registration.Show();
-        }
-
-        private void Exit_Click(object sender, EventArgs e)
-        {
-
-            foreach (var process in Process.GetProcessesByName("LoginSystem"))
-            {
-                process.Kill();
-            }
-
-        }
-
+        // When you hit the login button it will check if everything is filled out.
         private void button1_Click(object sender, EventArgs e)
         {
             if ((textBox1.Text == "" || textBox1.Text == "Username") && (textBox2.Text == "" || textBox2.Text == "Password"))
@@ -109,6 +96,25 @@ namespace LoginSystem
                 userErr.Text = "";
                 passErr.Text = "";
             }
+        }
+
+        // When you click register it will take you to register page.
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Register registration = new Register();
+            registration.Show();
+        }
+
+        // When you hit the X, it will kill the process to avoid problems. 
+        private void Exit_Click(object sender, EventArgs e)
+        {
+
+            foreach (var process in Process.GetProcessesByName("LoginSystem"))
+            {
+                process.Kill();
+            }
+
         }
     }
 }
