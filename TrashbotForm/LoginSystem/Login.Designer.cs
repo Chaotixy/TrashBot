@@ -35,10 +35,12 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.Exit = new System.Windows.Forms.Button();
+            this.userErr = new System.Windows.Forms.Label();
+            this.passErr = new System.Windows.Forms.Label();
             this.piclock = new System.Windows.Forms.PictureBox();
             this.picperson = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Exit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picperson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -68,7 +70,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(60, 256);
+            this.panel2.Location = new System.Drawing.Point(60, 263);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 1);
             this.panel2.TabIndex = 7;
@@ -79,7 +81,7 @@
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox2.ForeColor = System.Drawing.Color.White;
-            this.textBox2.Location = new System.Drawing.Point(86, 226);
+            this.textBox2.Location = new System.Drawing.Point(86, 233);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(182, 15);
             this.textBox2.TabIndex = 6;
@@ -99,6 +101,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Log in";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -116,10 +119,45 @@
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // Exit
+            // 
+            this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
+            this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.Exit.Location = new System.Drawing.Point(293, -1);
+            this.Exit.Name = "Exit";
+            this.Exit.Size = new System.Drawing.Size(45, 35);
+            this.Exit.TabIndex = 13;
+            this.Exit.Text = "X";
+            this.Exit.UseCompatibleTextRendering = true;
+            this.Exit.UseVisualStyleBackColor = false;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
+            // 
+            // userErr
+            // 
+            this.userErr.AutoSize = true;
+            this.userErr.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userErr.ForeColor = System.Drawing.Color.Red;
+            this.userErr.Location = new System.Drawing.Point(61, 200);
+            this.userErr.Name = "userErr";
+            this.userErr.Size = new System.Drawing.Size(0, 16);
+            this.userErr.TabIndex = 14;
+            // 
+            // passErr
+            // 
+            this.passErr.AutoSize = true;
+            this.passErr.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passErr.ForeColor = System.Drawing.Color.Red;
+            this.passErr.Location = new System.Drawing.Point(61, 274);
+            this.passErr.Name = "passErr";
+            this.passErr.Size = new System.Drawing.Size(0, 16);
+            this.passErr.TabIndex = 15;
+            // 
             // piclock
             // 
             this.piclock.Image = global::LoginSystem.Properties.Resources.lock1;
-            this.piclock.Location = new System.Drawing.Point(60, 224);
+            this.piclock.Location = new System.Drawing.Point(60, 231);
             this.piclock.Name = "piclock";
             this.piclock.Size = new System.Drawing.Size(20, 20);
             this.piclock.TabIndex = 12;
@@ -143,27 +181,14 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // Exit
-            // 
-            this.Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
-            this.Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.Exit.Location = new System.Drawing.Point(293, -1);
-            this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(45, 35);
-            this.Exit.TabIndex = 13;
-            this.Exit.Text = "X";
-            this.Exit.UseCompatibleTextRendering = true;
-            this.Exit.UseVisualStyleBackColor = false;
-            this.Exit.Click += new System.EventHandler(this.Exit_Click);
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(337, 503);
+            this.Controls.Add(this.passErr);
+            this.Controls.Add(this.userErr);
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.piclock);
             this.Controls.Add(this.picperson);
@@ -175,10 +200,11 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
-            this.TopMost = true;
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.piclock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picperson)).EndInit();
@@ -200,6 +226,8 @@
         private System.Windows.Forms.PictureBox picperson;
         private System.Windows.Forms.PictureBox piclock;
         private System.Windows.Forms.Button Exit;
+        private System.Windows.Forms.Label userErr;
+        private System.Windows.Forms.Label passErr;
     }
 }
 
