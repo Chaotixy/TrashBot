@@ -48,6 +48,8 @@
             this.boxUser = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.CompanyCheck = new System.Windows.Forms.RadioButton();
+            this.PersonCheck = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.picadd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.piccity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picuser)).BeginInit();
@@ -59,7 +61,7 @@
             this.userErr.AutoSize = true;
             this.userErr.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userErr.ForeColor = System.Drawing.Color.Red;
-            this.userErr.Location = new System.Drawing.Point(54, 164);
+            this.userErr.Location = new System.Drawing.Point(54, 197);
             this.userErr.Name = "userErr";
             this.userErr.Size = new System.Drawing.Size(0, 16);
             this.userErr.TabIndex = 45;
@@ -69,7 +71,7 @@
             this.addErr.AutoSize = true;
             this.addErr.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addErr.ForeColor = System.Drawing.Color.Red;
-            this.addErr.Location = new System.Drawing.Point(54, 244);
+            this.addErr.Location = new System.Drawing.Point(54, 277);
             this.addErr.Name = "addErr";
             this.addErr.Size = new System.Drawing.Size(0, 16);
             this.addErr.TabIndex = 44;
@@ -79,7 +81,7 @@
             this.cityErr.AutoSize = true;
             this.cityErr.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cityErr.ForeColor = System.Drawing.Color.Red;
-            this.cityErr.Location = new System.Drawing.Point(54, 325);
+            this.cityErr.Location = new System.Drawing.Point(54, 358);
             this.cityErr.Name = "cityErr";
             this.cityErr.Size = new System.Drawing.Size(0, 16);
             this.cityErr.TabIndex = 43;
@@ -102,7 +104,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Location = new System.Drawing.Point(52, 318);
+            this.panel3.Location = new System.Drawing.Point(52, 351);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(230, 1);
             this.panel3.TabIndex = 41;
@@ -110,7 +112,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(52, 156);
+            this.panel1.Location = new System.Drawing.Point(52, 189);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(230, 1);
             this.panel1.TabIndex = 40;
@@ -118,7 +120,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(53, 236);
+            this.panel2.Location = new System.Drawing.Point(53, 269);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(230, 1);
             this.panel2.TabIndex = 39;
@@ -129,7 +131,7 @@
             this.boxCity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.boxCity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.boxCity.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.boxCity.Location = new System.Drawing.Point(81, 293);
+            this.boxCity.Location = new System.Drawing.Point(81, 326);
             this.boxCity.Name = "boxCity";
             this.boxCity.Size = new System.Drawing.Size(161, 15);
             this.boxCity.TabIndex = 2;
@@ -142,7 +144,7 @@
             this.boxAddress.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.boxAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.boxAddress.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.boxAddress.Location = new System.Drawing.Point(81, 211);
+            this.boxAddress.Location = new System.Drawing.Point(81, 244);
             this.boxAddress.Name = "boxAddress";
             this.boxAddress.Size = new System.Drawing.Size(161, 15);
             this.boxAddress.TabIndex = 1;
@@ -152,7 +154,7 @@
             // picadd
             // 
             this.picadd.Image = global::LoginSystem.Properties.Resources.address1;
-            this.picadd.Location = new System.Drawing.Point(52, 208);
+            this.picadd.Location = new System.Drawing.Point(52, 241);
             this.picadd.Name = "picadd";
             this.picadd.Size = new System.Drawing.Size(20, 20);
             this.picadd.TabIndex = 36;
@@ -161,7 +163,7 @@
             // piccity
             // 
             this.piccity.Image = global::LoginSystem.Properties.Resources.city1;
-            this.piccity.Location = new System.Drawing.Point(52, 290);
+            this.piccity.Location = new System.Drawing.Point(52, 323);
             this.piccity.Name = "piccity";
             this.piccity.Size = new System.Drawing.Size(20, 20);
             this.piccity.TabIndex = 35;
@@ -170,7 +172,7 @@
             // picuser
             // 
             this.picuser.Image = global::LoginSystem.Properties.Resources.person1;
-            this.picuser.Location = new System.Drawing.Point(52, 127);
+            this.picuser.Location = new System.Drawing.Point(52, 160);
             this.picuser.Name = "picuser";
             this.picuser.Size = new System.Drawing.Size(20, 20);
             this.picuser.TabIndex = 34;
@@ -184,7 +186,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
-            this.button2.Location = new System.Drawing.Point(54, 409);
+            this.button2.Location = new System.Drawing.Point(54, 442);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(230, 35);
             this.button2.TabIndex = 4;
@@ -199,7 +201,7 @@
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("MS Reference Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(54, 351);
+            this.button1.Location = new System.Drawing.Point(54, 384);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(230, 35);
             this.button1.TabIndex = 3;
@@ -212,7 +214,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(50, 264);
+            this.label3.Location = new System.Drawing.Point(50, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(33, 18);
             this.label3.TabIndex = 30;
@@ -223,7 +225,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(50, 183);
+            this.label2.Location = new System.Drawing.Point(50, 216);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(62, 18);
             this.label2.TabIndex = 29;
@@ -236,23 +238,23 @@
             this.boxUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.boxUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.boxUser.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.boxUser.Location = new System.Drawing.Point(81, 130);
+            this.boxUser.Location = new System.Drawing.Point(81, 163);
             this.boxUser.Name = "boxUser";
             this.boxUser.Size = new System.Drawing.Size(161, 15);
             this.boxUser.TabIndex = 0;
-            this.boxUser.Text = "Enter full name";
+            this.boxUser.Text = "Enter company name";
             this.boxUser.Click += new System.EventHandler(this.boxUser_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(49, 100);
+            this.label1.Location = new System.Drawing.Point(49, 133);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 18);
+            this.label1.Size = new System.Drawing.Size(116, 18);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Full name";
+            this.label1.Text = "Company Name";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox1
@@ -264,12 +266,42 @@
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
             // 
+            // CompanyCheck
+            // 
+            this.CompanyCheck.AutoSize = true;
+            this.CompanyCheck.Checked = true;
+            this.CompanyCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompanyCheck.ForeColor = System.Drawing.Color.White;
+            this.CompanyCheck.Location = new System.Drawing.Point(52, 102);
+            this.CompanyCheck.Name = "CompanyCheck";
+            this.CompanyCheck.Size = new System.Drawing.Size(84, 20);
+            this.CompanyCheck.TabIndex = 46;
+            this.CompanyCheck.TabStop = true;
+            this.CompanyCheck.Text = "Company";
+            this.CompanyCheck.UseVisualStyleBackColor = true;
+            this.CompanyCheck.CheckedChanged += new System.EventHandler(this.CompanyCheck_CheckedChanged);
+            // 
+            // PersonCheck
+            // 
+            this.PersonCheck.AutoSize = true;
+            this.PersonCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PersonCheck.ForeColor = System.Drawing.Color.White;
+            this.PersonCheck.Location = new System.Drawing.Point(142, 102);
+            this.PersonCheck.Name = "PersonCheck";
+            this.PersonCheck.Size = new System.Drawing.Size(65, 20);
+            this.PersonCheck.TabIndex = 47;
+            this.PersonCheck.Text = "Citizen";
+            this.PersonCheck.UseVisualStyleBackColor = true;
+            this.PersonCheck.CheckedChanged += new System.EventHandler(this.PersonCheck_CheckedChanged);
+            // 
             // Register2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
             this.ClientSize = new System.Drawing.Size(337, 503);
+            this.Controls.Add(this.PersonCheck);
+            this.Controls.Add(this.CompanyCheck);
             this.Controls.Add(this.userErr);
             this.Controls.Add(this.addErr);
             this.Controls.Add(this.cityErr);
@@ -326,5 +358,7 @@
         private System.Windows.Forms.TextBox boxUser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.RadioButton CompanyCheck;
+        private System.Windows.Forms.RadioButton PersonCheck;
     }
 }
