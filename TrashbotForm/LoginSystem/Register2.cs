@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-
+using System.Data.SqlClient;
 
 namespace LoginSystem
 {
     public partial class Register2 : Form
     {
+        private string sql;
         public Register2()
         {
             InitializeComponent();
@@ -284,6 +285,46 @@ namespace LoginSystem
 
                 addErr.Text = "* Please enter address";
                 cityErr.Text = "* Please enter city";
+            }
+            else
+            {
+                string UserName = Register.UserName;
+                string UserMail = Register.UserMail;
+                string UserPass = Register.UserPass;
+                string FullName = boxUser.Text;
+                string Address = boxAddress.Text;
+                string City = boxCity.Text;
+
+                string con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                             "Initial Catalog = Trashbot; User ID = UserRegister; Password = Test123;";
+                using (SqlConnection cnn = new SqlConnection(con))
+                {
+                    if (PersonCheck.Checked)
+                    {
+                        sql =
+                            "INSERT INTO Home_User ([Name],[Address],[City],[Email],[Password],[Username]) VALUES (@Fullname,@Address,@City,@Email,@Password,@Username)";
+                    }
+                    if (CompanyCheck.Checked)
+                    {
+                        sql =
+                            "INSERT INTO Trash_Company ([Name],[Address],[City],[Username],[Password],[Company_Email]) VALUES (@Fullname,@Address,@City,@Username,@Password,@Email)";
+                    }
+
+                    cnn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", UserName);
+                        cmd.Parameters.AddWithValue("@Email", UserMail);
+                        cmd.Parameters.AddWithValue("@Password", UserPass);
+                        cmd.Parameters.AddWithValue("@Fullname", FullName);
+                        cmd.Parameters.AddWithValue("@Address", Address);
+                        cmd.Parameters.AddWithValue("@City", City);
+
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("Row inserted !! ");
+                        cnn.Close();
+                    }
+                }
             }
         }
 
