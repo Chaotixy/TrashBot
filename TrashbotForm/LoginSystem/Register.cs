@@ -4,16 +4,17 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Mail;
-
 namespace LoginSystem
 {
     public partial class Register : Form
     {
+        public static string UserName, UserMail, UserPass;
         public Register()
         {
             InitializeComponent();
@@ -289,9 +290,14 @@ namespace LoginSystem
                 // Checks if the email that is filled in is actually an email before you can go to next step.
                 if (!(boxEmail.Text == "" || boxEmail.Text == "You@example.com"))
                 {
+                    
                     try
                     {
+                        
                         var validate = new MailAddress(boxEmail.Text);
+                        UserName = boxUser.Text;
+                        UserMail = boxEmail.Text;
+                        UserPass = boxPass.Text;
                         this.Hide();
                         Register2 next = new Register2();
                         next.Show();
@@ -304,7 +310,7 @@ namespace LoginSystem
 
                
             }
-
+        
         }
 
         // When you click login button it will take you to login page.
