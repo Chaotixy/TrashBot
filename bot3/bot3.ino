@@ -1,54 +1,42 @@
 #include "MPU6050_tockn.h"
 #include <SoftwareSerial.h>
 #include <Wire.h>
-#define trigPin 13
-#define echoPin 12
+#define trigPin1 13
+#define echoPin1 12
+#define trigPin2 14
+#define echoPin2 15
 #define leftWheelUp 3
 #define leftWheelDown 2
 #define rightWheelUp 9
 #define rightWheelDown 4
 
+  int state; //state of the loop
+  int line;
+  int speed;
+  //MPU6050 mpu; 
+  //gyro
+  //Flexi Force
+  float var1 = 19.5;    // caliberation factor
 
+  int var2 = A0;  // FlexiForce sensor is connected analog pin A0 of arduino 
 
+  int var3 = 0;
+  float vout;
 
-#define bt_power 7
-#define bt_key_power 8
-SoftwareSerial BT(A0, A1); //setup bluetooth
-int state; //state of the loop
-int line;
-int speed;
-//MPU6050 mpu; 
-//gyro
-float var1 = 19.5;    // caliberation factor
-
-int var2 = A0;  // FlexiForce sensor is connected analog pin A0 of arduino 
-
-int var3 = 0;
-float vout;
-
-void setup() {
+  void setup() {
   line = 0;
   //initiate BT serial at 38400
-  BT.begin(38400);
-  pinMode(bt_power, OUTPUT);
-  pinMode(bt_key_power, OUTPUT);
+  
+ 
+  
   pinMode(var2, INPUT);
   Serial.begin (9600);
-  digitalWrite(bt_power, LOW);
-  digitalWrite (bt_key_power, LOW);
-  //key low
-  delay(100);
-
-  //key high
-  digitalWrite(bt_key_power, HIGH);
-
-  delay(100);
-
-  //power BT
-  digitalWrite(bt_power, HIGH);
   
-  pinMode(trigPin, OUTPUT); //ultrasonic sound sensor
-  pinMode(echoPin, INPUT);
+  pinMode(trigPin1, OUTPUT); //ultrasonic sound sensor1
+  pinMode(echoPin1, INPUT);
+
+  pinMode(trigPin2, OUTPUT); //ultrasonic sound sensor2
+  pinMode(echoPin2, INPUT);
   //mpu.initialize();
   //gyro
   
@@ -82,8 +70,8 @@ void right() {
   digitalWrite(rightWheelUp, LOW);  
   digitalWrite(rightWheelDown, HIGH);
 
-  analogWrite(leftWheelUp, 80);
-  analogWrite(rightWheelUp, 80);
+  analogWrite(leftWheelUp, 50);
+  analogWrite(rightWheelUp, 50);
 }
 void backwards() {
   digitalWrite(leftWheelUp, LOW);
@@ -102,64 +90,64 @@ void breaks() {
 }
 
 
- 
-//function to move to the next game
-void autoMode() {
-  forward();
-  delay(6000);
-  left();
-  delay(500);
-  breaks();
-  delay(100);
-  forward();
-  delay(200);
-}
-
 void loop() {
-//Bluetooth
-if(BT.available()>0) {
-  state = BT.read();
-}
 
-//takes input from buttons by the BT device in ASCII
-if(state == 57) //breaks
-{
-breaks();
-} 
-
-else if(state == 55) { //bump wall game
-  long duration, distance;
-  digitalWrite(trigPin, LOW);  
-  delayMicroseconds(2); 
-  digitalWrite(trigPin, HIGH);
-
-  delayMicroseconds(10); 
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
-  distance = (duration/2) / 29.1;
-
-   if(distance > 30) {
-    forward();
-    }
-    
-    if (distance >= 0 && distance <= 87){
-    breaks();
-    backwards();
-    right();
-    right();
-    }
- }
+  
+ 
   delay(80);
 
-//Flexi Force
+//Flexi Force ------- Calculate the weight
 
 var3 = analogRead(var2);
 vout = (var3 * 5.0) / 1023.0;
 vout = vout * var1;
 vout = vout * 100;
-Serial.print("Flexi Force sensor: ");
-Serial.print(vout,3);
-Serial.println("");
+
+//send weight to server
+
 delay(100);
-}
-  
+
+//if full or not ----- Ultrasonic sensor
+
+  long duration, distance;
+  digitalWrite(trigPin2, LOW);  
+  delayMicroseconds(2); 
+  digitalWrite(trigPin2, HIGH);
+
+  delayMicroseconds(10); 
+  digitalWrite(trigPin2, LOW);
+  duration = pulseIn(echoPin2, HIGH);
+  distance = (duration/2) / 29.1;
+
+  if(distance > 6.5) {
+    //bin empty
+    }
+    
+    if (distance >= 0 && distance <= 6.5){
+    //bin full
+    //avoid obstacles
+    long duration, distance;
+    digitalWrite(trigPin1, LOW);  
+    delayMicroseconds(2); 
+    digitalWrite(trigPin1, HIGH);
+
+    delayMicroseconds(10); 
+    digitalWrite(trigPin1, LOW);
+    duration = pulseIn(echoPin1, HIGH);
+    distance = (duration/2) / 29.1;
+
+    if(distance > 20) {
+    forward();
+    }
+    
+    if (distance >= 0 && distance <= 25){
+    breaks();
+    delay(1000);
+    backwards();
+    delay(150);
+    right();
+    
+    }
+  }
+  delay(80);
+}  
