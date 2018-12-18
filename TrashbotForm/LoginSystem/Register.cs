@@ -52,14 +52,17 @@ namespace LoginSystem
             picuser.Image = Properties.Resources.person2;
             panel1.BackColor = Color.FromArgb(216, 191, 170);
             boxUser.ForeColor = Color.FromArgb(216, 191, 170);
+            label1.ForeColor = Color.FromArgb(216, 191, 170);
 
             picemail.Image = Properties.Resources.email1;
             panel2.BackColor = Color.White;
             boxEmail.ForeColor = Color.White;
+            label2.ForeColor = Color.White;
 
             piclock.Image = Properties.Resources.lock1;
             panel3.BackColor = Color.White;
             boxPass.ForeColor = Color.White;
+            label3.ForeColor = Color.White;
 
             if (boxPass.Text == "")
             {
@@ -84,14 +87,17 @@ namespace LoginSystem
             piclock.Image = Properties.Resources.lock2;
             panel3.BackColor = Color.FromArgb(216, 191, 170);
             boxPass.ForeColor = Color.FromArgb(216, 191, 170);
+            label3.ForeColor = Color.FromArgb(216, 191, 170);
 
             picuser.Image = Properties.Resources.person1;
             panel1.BackColor = Color.White;
             boxUser.ForeColor = Color.White;
+            label1.ForeColor = Color.White;
 
             picemail.Image = Properties.Resources.email1;
             panel2.BackColor = Color.White;
             boxEmail.ForeColor = Color.White;
+            label2.ForeColor = Color.White;
 
 
             if (boxUser.Text == "")
@@ -115,14 +121,17 @@ namespace LoginSystem
             picemail.Image = Properties.Resources.email2;
             panel2.BackColor = Color.FromArgb(216, 191, 170);
             boxEmail.ForeColor = Color.FromArgb(216, 191, 170);
+            label2.ForeColor = Color.FromArgb(216, 191, 170);
 
             picuser.Image = Properties.Resources.person1;
             panel1.BackColor = Color.White;
             boxUser.ForeColor = Color.White;
+            label1.ForeColor = Color.White;
 
             piclock.Image = Properties.Resources.lock1;
             panel3.BackColor = Color.White;
             boxPass.ForeColor = Color.White;
+            label3.ForeColor = Color.White;
 
             if (boxPass.Text == "")
             {

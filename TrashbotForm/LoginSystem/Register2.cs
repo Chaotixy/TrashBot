@@ -17,12 +17,15 @@ namespace LoginSystem
         public Register2()
         {
             InitializeComponent();
+
+           
         }
 
         // Makes application icon bigger in taskbar.
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -35,24 +38,29 @@ namespace LoginSystem
 
         }
 
+
+
         // Styling for when you click the add-fullname box.
         private void boxUser_Click(object sender, EventArgs e)
         {
-            if (boxUser.Text == "" || boxUser.Text == "Enter full name")
+            if (boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name")
             {
                 boxUser.Clear();
             }
             picuser.Image = Properties.Resources.person2;
             panel1.BackColor = Color.FromArgb(216, 191, 170);
             boxUser.ForeColor = Color.FromArgb(216, 191, 170);
+            label1.ForeColor = Color.FromArgb(216, 191, 170);
 
             picadd.Image = Properties.Resources.address1;
             panel2.BackColor = Color.White;
             boxAddress.ForeColor = Color.White;
+            label2.ForeColor = Color.White;
 
             piccity.Image = Properties.Resources.city1;
             panel3.BackColor = Color.White;
             boxCity.ForeColor = Color.White;
+            label3.ForeColor = Color.White;
 
             if (boxAddress.Text == "")
             {
@@ -75,14 +83,17 @@ namespace LoginSystem
             picadd.Image = Properties.Resources.address2;
             panel2.BackColor = Color.FromArgb(216, 191, 170);
             boxAddress.ForeColor = Color.FromArgb(216, 191, 170);
+            label2.ForeColor = Color.FromArgb(216, 191, 170);
 
             picuser.Image = Properties.Resources.person1;
             panel1.BackColor = Color.White;
             boxUser.ForeColor = Color.White;
+            label1.ForeColor = Color.White;
 
             piccity.Image = Properties.Resources.city1;
             panel3.BackColor = Color.White;
             boxCity.ForeColor = Color.White;
+            label3.ForeColor = Color.White;
 
             if (boxCity.Text == "")
             {
@@ -90,7 +101,14 @@ namespace LoginSystem
             }
             if (boxUser.Text == "")
             {
-                boxUser.Text = "Enter full name";
+                if (PersonCheck.Checked)
+                {
+                    boxUser.Text = "Enter full name";
+                }else if (CompanyCheck.Checked)
+                {
+                    boxUser.Text = "Enter company name";
+                }
+                
             }
         }
 
@@ -105,19 +123,29 @@ namespace LoginSystem
             piccity.Image = Properties.Resources.city2;
             panel3.BackColor = Color.FromArgb(216, 191, 170);
             boxCity.ForeColor = Color.FromArgb(216, 191, 170);
+            label3.ForeColor = Color.FromArgb(216, 191, 170);
 
             picuser.Image = Properties.Resources.person1;
             panel1.BackColor = Color.White;
             boxUser.ForeColor = Color.White;
+            label1.ForeColor = Color.White;
 
             picadd.Image = Properties.Resources.address1;
             panel2.BackColor = Color.White;
             boxAddress.ForeColor = Color.White;
+            label2.ForeColor = Color.White;
 
 
             if (boxUser.Text == "")
             {
-                boxUser.Text = "Enter full name";
+                if (PersonCheck.Checked)
+                {
+                    boxUser.Text = "Enter full name";
+                }
+                else if (CompanyCheck.Checked)
+                {
+                    boxUser.Text = "Enter company name";
+                }
             }
             if (boxAddress.Text == "")
             {
@@ -129,9 +157,16 @@ namespace LoginSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
-            if (boxUser.Text == "" || boxUser.Text == "Enter full name")
+            if (boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name")
             {
-                userErr.Text = "* Please enter full name";
+                if (PersonCheck.Checked)
+                { 
+                    userErr.Text = "* Please enter full name";
+                }
+                else if (CompanyCheck.Checked)
+                {
+                    userErr.Text = "* Please enter company name";
+                }
 
                 if (boxAddress.Text == "" || boxAddress.Text == "Enter address")
                 {
@@ -151,6 +186,7 @@ namespace LoginSystem
                 {
                     cityErr.Text = "";
                 }
+
 
 
             }
@@ -163,9 +199,16 @@ namespace LoginSystem
             {
                 addErr.Text = "* Please enter address";
 
-                if (boxUser.Text == "" || boxUser.Text == "Enter full name")
+                if (boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name")
                 {
-                    userErr.Text = "* Please enter full name";
+                    if (PersonCheck.Checked)
+                    {
+                        userErr.Text = "* Please enter full name";
+                    }
+                    else if (CompanyCheck.Checked)
+                    {
+                        userErr.Text = "* Please enter company name";
+                    }
                 }
                 else
                 {
@@ -182,7 +225,7 @@ namespace LoginSystem
                     cityErr.Text = "";
                 }
 
-
+               
             }
             else
             {
@@ -193,9 +236,16 @@ namespace LoginSystem
             {
                 cityErr.Text = "* Please enter city";
 
-                if (boxUser.Text == "" || boxUser.Text == "Enter full name")
+                if (boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name")
                 {
-                    userErr.Text = "* Please enter full name";
+                    if (PersonCheck.Checked)
+                    {
+                        userErr.Text = "* Please enter full name";
+                    }
+                    else if (CompanyCheck.Checked)
+                    {
+                        userErr.Text = "* Please enter company name";
+                    }
                 }
                 else
                 {
@@ -210,15 +260,28 @@ namespace LoginSystem
                 {
                     addErr.Text = "";
                 }
+
+                
             }
             else
             {
                 cityErr.Text = "";
             }
 
-            if ((boxUser.Text == "" || boxUser.Text == "Enter full name") && (boxAddress.Text == "" || boxAddress.Text == "Enter address") && (boxCity.Text == "" || boxCity.Text == "Enter city"))
+
+      
+
+            if ((boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name") && (boxAddress.Text == "" || boxAddress.Text == "Enter address") && (boxCity.Text == "" || boxCity.Text == "Enter city"))
             {
-                userErr.Text = "* Please enter full name";
+                if (PersonCheck.Checked)
+                {
+                    userErr.Text = "* Please enter full name";
+                }
+                else if (CompanyCheck.Checked)
+                {
+                    userErr.Text = "* Please enter company name";
+                }
+
                 addErr.Text = "* Please enter address";
                 cityErr.Text = "* Please enter city";
             }
@@ -239,6 +302,38 @@ namespace LoginSystem
             {
                 process.Kill();
             }
+        }
+
+        private void CompanyCheck_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (CompanyCheck.Checked)
+            {
+                label1.Text = "Company name";
+            }
+            else if (PersonCheck.Checked)
+            {
+                label1.Text = "Full name";
+            }
+
+        }
+
+        // Changes label text when the according radio button is pushed.
+        private void PersonCheck_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+            if (CompanyCheck.Checked)
+            {
+                label1.Text = "Company name";
+                boxUser.Text = "Enter company name";
+            }
+            else if (PersonCheck.Checked)
+            {
+                label1.Text = "Full name";
+                boxUser.Text = "Enter full name";
+            }
+
         }
     }
 }
