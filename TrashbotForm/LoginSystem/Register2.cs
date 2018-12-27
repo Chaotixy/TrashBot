@@ -321,7 +321,7 @@ namespace LoginSystem
                         cmd.Parameters.AddWithValue("@City", City);
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("Row inserted !! ");
+                        MessageBox.Show("Registered !! ");
                         cnn.Close();
                     }
                 }

@@ -9,14 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
-
+using System.Data.Sql;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 namespace LoginSystem
 {
    
 
     public partial class Login : Form
     {
+        string con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                     "Initial Catalog = Trashbot; User ID = UserLogin; Password = Test123;";
 
+        private static int attempt = 3;
+        private string sql;
         public Login()
         {
             InitializeComponent();
@@ -96,6 +102,55 @@ namespace LoginSystem
                 userErr.Text = "";
                 passErr.Text = "";
             }
+
+            if ((textBox1.Text != "" || textBox1.Text != "Username") &&
+                (textBox2.Text != "" || textBox2.Text != "Password"))
+            {
+                if (attempt == 0)
+                {
+                    MessageBox.Show("All 3 attempts have failed, please contact the support!");
+                    return;
+                }
+
+                using (SqlConnection cnn = new SqlConnection(con))
+                {
+
+                    string UserName = textBox1.Text;
+                    string PassWord = textBox2.Text;
+                    if (PersonCheck.Checked)
+                    {
+                        sql =
+                            "SELECT Username, Password FROM Home_User WHERE [Username] = @Username AND [Password] = @Password";
+                    }
+
+                    if (CompanyCheck.Checked)
+                    {
+                        sql =
+                            "SELECT Username, Password FROM Trash_Company WHERE [Username] = @Username AND [Password] = @Password";
+                    }
+                    cnn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", UserName);
+                        cmd.Parameters.AddWithValue("@Password", PassWord);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            MessageBox.Show("Success!");
+                            attempt = 3;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
+                            --attempt;
+                        }
+
+                    }
+                }
+            }
+
         }
 
         // When you click register it will take you to register page.
