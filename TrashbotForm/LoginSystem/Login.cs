@@ -146,6 +146,7 @@ namespace LoginSystem
                             MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
                             --attempt;
                         }
+                        cnn.Close();
 
                     }
                 }

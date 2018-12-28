@@ -297,32 +297,71 @@ namespace LoginSystem
 
                 string con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
                              "Initial Catalog = Trashbot; User ID = UserRegister; Password = Test123;";
-                using (SqlConnection cnn = new SqlConnection(con))
+                string conLogin = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                             "Initial Catalog = Trashbot; User ID = UserLogin; Password = Test123;";
+                using (SqlConnection cnn = new SqlConnection(conLogin))
                 {
+
+
                     if (PersonCheck.Checked)
                     {
                         sql =
-                            "INSERT INTO Home_User ([Name],[Address],[City],[Email],[Password],[Username]) VALUES (@Fullname,@Address,@City,@Email,@Password,@Username)";
+                            "SELECT Username FROM Home_User WHERE [Username] = @Username;";
                     }
+
                     if (CompanyCheck.Checked)
                     {
                         sql =
-                            "INSERT INTO Trash_Company ([Name],[Address],[City],[Username],[Password],[Company_Email]) VALUES (@Fullname,@Address,@City,@Username,@Password,@Email)";
+                            "SELECT Username FROM Trash_Company WHERE [Username] = @Username";
                     }
 
                     cnn.Open();
                     using (SqlCommand cmd = new SqlCommand(sql, cnn))
                     {
                         cmd.Parameters.AddWithValue("@Username", UserName);
-                        cmd.Parameters.AddWithValue("@Email", UserMail);
-                        cmd.Parameters.AddWithValue("@Password", UserPass);
-                        cmd.Parameters.AddWithValue("@Fullname", FullName);
-                        cmd.Parameters.AddWithValue("@Address", Address);
-                        cmd.Parameters.AddWithValue("@City", City);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            MessageBox.Show("User already exist!");
+                            cnn.Close();
+                        }
+                        else
+                        {
+                            cnn.Close();
+                            using (SqlConnection cnn2 = new SqlConnection(con))
+                            {
+                                if (PersonCheck.Checked)
+                                {
+                                    sql =
+                                        "INSERT INTO Home_User ([Name],[Address],[City],[Email],[Password],[Username]) VALUES (@Fullname,@Address,@City,@Email,@Password,@Username)";
+                                }
+                                if (CompanyCheck.Checked)
+                                {
+                                    sql =
+                                        "INSERT INTO Trash_Company ([Name],[Address],[City],[Username],[Password],[Company_Email]) VALUES (@Fullname,@Address,@City,@Username,@Password,@Email)";
+                                }
 
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Registered !! ");
-                        cnn.Close();
+                                cnn2.Open();
+                                using (SqlCommand cmd2 = new SqlCommand(sql, cnn2))
+                                {
+                                    cmd2.Parameters.AddWithValue("@Username", UserName);
+                                    cmd2.Parameters.AddWithValue("@Email", UserMail);
+                                    cmd2.Parameters.AddWithValue("@Password", UserPass);
+                                    cmd2.Parameters.AddWithValue("@Fullname", FullName);
+                                    cmd2.Parameters.AddWithValue("@Address", Address);
+                                    cmd2.Parameters.AddWithValue("@City", City);
+
+                                    cmd2.ExecuteNonQuery();
+                                    MessageBox.Show("Registered !! ");
+                                    cnn2.Close();
+                                }
+                            }
+
+                        }
+
+
                     }
                 }
             }
