@@ -31,6 +31,36 @@ namespace LoginSystem
             InitializeComponent();
         }
 
+        // So you can move the form around
+        private bool mouseDown;
+        private Point lastLocation;
+
+        private void Login_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+
+        }
+
+        private void Login_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+
+        }
+
+        private void Login_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+
+
         // Makes application icon bigger in taskbar.
         private void Form1_Load(object sender, EventArgs e)
         {
