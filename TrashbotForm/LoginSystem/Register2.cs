@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace LoginSystem
 {
@@ -37,6 +38,25 @@ namespace LoginSystem
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        //Create the hashing process
+        static string HashProcess(string rawData)
+        {
+            
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+               
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+ 
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
 
@@ -291,6 +311,12 @@ namespace LoginSystem
                 string UserName = Register.UserName;
                 string UserMail = Register.UserMail;
                 string UserPass = Register.UserPass;
+
+                // Hash password
+                string HashPass = HashProcess(UserPass);
+
+
+
                 string FullName = boxUser.Text;
                 string Address = boxAddress.Text;
                 string City = boxCity.Text;
@@ -348,7 +374,7 @@ namespace LoginSystem
                                 {
                                     cmd2.Parameters.AddWithValue("@Username", UserName);
                                     cmd2.Parameters.AddWithValue("@Email", UserMail);
-                                    cmd2.Parameters.AddWithValue("@Password", UserPass);
+                                    cmd2.Parameters.AddWithValue("@Password", HashPass);
                                     cmd2.Parameters.AddWithValue("@Fullname", FullName);
                                     cmd2.Parameters.AddWithValue("@Address", Address);
                                     cmd2.Parameters.AddWithValue("@City", City);

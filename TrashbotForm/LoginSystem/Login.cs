@@ -12,6 +12,9 @@ using System.Threading;
 using System.Data.Sql;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+
+
 namespace LoginSystem
 {
    
@@ -32,6 +35,24 @@ namespace LoginSystem
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Icon = new Icon(this.Icon, new Size(this.Icon.Width * 5, this.Icon.Height * 5));
+        }
+
+        //Create the hashing process
+        static string HashProcess(string rawData)
+        {
+
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
         // Styling for when you click the username box.
@@ -116,7 +137,12 @@ namespace LoginSystem
                 {
 
                     string UserName = textBox1.Text;
-                    string PassWord = textBox2.Text;
+
+                    // Hash password
+                    string raw = textBox2.Text;
+                    string HashPass = HashProcess(raw);
+                    string PassWord = HashPass;
+
                     if (PersonCheck.Checked)
                     {
                         sql =
