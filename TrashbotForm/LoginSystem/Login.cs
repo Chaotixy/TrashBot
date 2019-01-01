@@ -98,7 +98,20 @@ namespace LoginSystem
             if (textBox1.Text == "")
             {
                 textBox1.Text = "Username";
+
             }
+        }
+
+        // To make sure the password is still hidden after pressing the tab key
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && textBox1.Focused)
+            {
+                textBox2.PasswordChar = '•';
+
+            }
+            
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         // When you hit the login button it will check if everything is filled out.
@@ -198,5 +211,7 @@ namespace LoginSystem
             }
 
         }
+
+        
     }
 }

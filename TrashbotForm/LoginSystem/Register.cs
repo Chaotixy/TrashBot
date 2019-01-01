@@ -110,7 +110,19 @@ namespace LoginSystem
             }
         }
 
-       
+        // To make sure the password is still hidden after pressing the tab key
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && boxEmail.Focused)
+            {
+                boxPass.PasswordChar = '•';
+
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
         // Styling for when you click the add-email button.
         private void boxEmail_Click_1(object sender, EventArgs e)
         {
