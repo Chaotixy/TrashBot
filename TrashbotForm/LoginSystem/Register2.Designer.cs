@@ -327,6 +327,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Register";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Register2_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Register2_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Register2_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.picadd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.piccity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picuser)).EndInit();

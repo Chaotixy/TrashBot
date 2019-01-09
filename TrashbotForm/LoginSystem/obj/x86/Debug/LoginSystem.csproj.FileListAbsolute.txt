@@ -22,3 +22,15 @@ C:\Users\daniq\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\Logi
 C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csprojAssemblyReference.cache
 C:\Users\Danique\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Register2.resources
 C:\Users\daniq\Source\Repos\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Register2.resources
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.exe.config
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.exe
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\bin\x86\Debug\LoginSystem.pdb
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csprojAssemblyReference.cache
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Register2.resources
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Login.resources
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Properties.Resources.resources
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.Register.resources
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csproj.GenerateResource.cache
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.csproj.CoreCompileInputs.cache
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.exe
+C:\Users\tim_n\Documents\GitHub\TrashBot\TrashbotForm\LoginSystem\obj\x86\Debug\LoginSystem.pdb

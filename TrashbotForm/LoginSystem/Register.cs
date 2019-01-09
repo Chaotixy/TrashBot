@@ -20,6 +20,32 @@ namespace LoginSystem
             InitializeComponent();
         }
 
+
+        // So you can move the form around
+        private bool mouseDown;
+        private Point lastLocation;
+        private void Register_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Register_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void Register_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
         // Makes application icon bigger in taskbar.
         private void Register_Load(object sender, EventArgs e)
         {
@@ -110,7 +136,19 @@ namespace LoginSystem
             }
         }
 
-       
+        // To make sure the password is still hidden after pressing the tab key
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && boxEmail.Focused)
+            {
+                boxPass.PasswordChar = '•';
+
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
         // Styling for when you click the add-email button.
         private void boxEmail_Click_1(object sender, EventArgs e)
         {
@@ -312,6 +350,8 @@ namespace LoginSystem
             }
         
         }
+
+       
 
         // When you click login button it will take you to login page.
         private void button2_Click(object sender, EventArgs e)
