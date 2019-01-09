@@ -124,6 +124,7 @@ if (client.connect(server, 80)) {
     client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
     client.println(); //empty line
     client.stop(); //Closing connection to the server
+}
 else {
     // If Arduino can't connect to the server 
     Serial.println("--> connection failed\n");
@@ -147,33 +148,46 @@ delay(10000);
     //bin full
     //Send bin state to the server
     bin_state = "Full";
+	
+	//send bin state to server
+	if (client.connect(server, 80)) {
+		client.print("GET /write_data.php?");
+		client.print("value="); 
+		client.print(bin_state);
+		client.println(" HTTP/1.1"); // Part of the GET request
+		client.println("Host: 81.169.200.100,1433");
+		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+		client.println(); //empty line
+		client.stop(); //Closing connection to the server
+	}
+	else {
+    // If Arduino can't connect to the server 
+		Serial.println("--> connection failed\n");
+	}
 
-    //****THIS WILL BE REPLACED BY FOLLOW THE LINE CODE OR ARDUINO CODE****
-    long duration, distance;
-    digitalWrite(trigPin1, LOW);  
-    delayMicroseconds(2); 
-    digitalWrite(trigPin1, HIGH);
-
-    delayMicroseconds(10); 
-    digitalWrite(trigPin1, LOW);
-    duration = pulseIn(echoPin1, HIGH);
-    distance = (duration/2) / 29.1;
-
-    if(distance > 20) {
-    forward();
-    }
-    
-    if (distance >= 0 && distance <= 25){
-    breaks();
-    delay(1000);
-    backwards();
-    delay(150);
-    right();
-    
-    }
+	delay(10000);
+	
+	//INSERT GYRO CODE HERE//
   }
   else {
     bin_state = "Not full";
+	
+	//send bin state to server
+	if (client.connect(server, 80)) {
+		client.print("GET /write_data.php?");
+		client.print("value="); 
+		client.print(bin_state);
+		client.println(" HTTP/1.1"); // Part of the GET request
+		client.println("Host: 81.169.200.100,1433");
+		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+		client.println(); //empty line
+		client.stop(); //Closing connection to the server
+	}
+	else {
+    // If Arduino can't connect to the server 
+		Serial.println("--> connection failed\n");
+	}
+
+	delay(10000);
   }
-  delay(10000);
 }  
