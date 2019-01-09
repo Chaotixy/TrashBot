@@ -26,6 +26,7 @@ namespace LoginSystem
 
         private static int attempt = 3;
         private string sql;
+        int SessionUserID;
         public Login()
         {
             InitializeComponent();
@@ -224,38 +225,69 @@ namespace LoginSystem
                     if (PersonCheck.Checked)
                     {
                         sql =
-                            "SELECT Username, Password FROM Home_User WHERE [Username] = @Username AND [Password] = @Password";
+                            "SELECT Username, Password, Home_User_ID FROM Home_User WHERE [Username] = @Username AND [Password] = @Password";
                     }
 
                     if (CompanyCheck.Checked)
                     {
                         sql =
-                            "SELECT Username, Password FROM Trash_Company WHERE [Username] = @Username AND [Password] = @Password";
+                            "SELECT Username, Password, Trash_Company_ID FROM Trash_Company WHERE [Username] = @Username AND [Password] = @Password";
                     }
+
                     cnn.Open();
                     using (SqlCommand cmd = new SqlCommand(sql, cnn))
                     {
                         cmd.Parameters.AddWithValue("@Username", UserName);
                         cmd.Parameters.AddWithValue("@Password", PassWord);
+
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable dt = new DataTable();
                         da.Fill(dt);
                         if (dt.Rows.Count > 0)
                         {
-                            MessageBox.Show("Success!");
+
+
                             attempt = 3;
+                            //Create a Session via grabbing ID of Tables
+                            if (CompanyCheck.Checked)
+                            {
+                                //Create a Reader to get the ID
+                                SqlDataReader IDRdr = null;
+
+                                IDRdr = cmd.ExecuteReader();
+                                while (IDRdr.Read())
+                                {
+                                    SessionUserID =  (int)IDRdr["Trash_Company_ID"];
+                                }
+                            }
+
+                            if (PersonCheck.Checked)
+                            {
+                                SqlDataReader IDRdr = null;
+
+                                IDRdr = cmd.ExecuteReader();
+                                while (IDRdr.Read())
+                                {
+                                    SessionUserID = (int)IDRdr["Home_User_ID"];
+                                }
+                                
+                            }
+
+                            MessageBox.Show("Success! You are Customer:"+SessionUserID);
                         }
+
                         else
-                        {
-                            MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
-                            --attempt;
+                            {
+                                MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
+                                --attempt;
+                            }
+
+                            cnn.Close();
+
                         }
-                        cnn.Close();
-
                     }
-                }
+                
             }
-
         }
 
         // When you click register it will take you to register page.
