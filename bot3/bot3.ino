@@ -119,7 +119,7 @@ if (client.connect(server, 80)) {
     client.print("value="); 
     client.print(weight);
     client.println(" HTTP/1.1"); // Part of the GET request
-    client.println("Host: DBMSSOCN");
+    client.println("Host: 81.169.200.100,1433");
     client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
     client.println(); //empty line
     client.stop(); //Closing connection to the server
