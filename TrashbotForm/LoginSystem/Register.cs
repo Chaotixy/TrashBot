@@ -141,6 +141,11 @@ namespace LoginSystem
         {
             if (keyData == Keys.Tab && boxEmail.Focused)
             {
+
+                if (boxPass.Text == "" || boxPass.Text == "Create a password")
+                {
+                    boxPass.Clear();
+                }
                 boxPass.PasswordChar = '•';
                 piclock.Image = Properties.Resources.lock2;
                 panel3.BackColor = Color.FromArgb(216, 191, 170);
@@ -192,7 +197,19 @@ namespace LoginSystem
                 boxPass.ForeColor = Color.White;
                 label3.ForeColor = Color.White;
             }
+            else if (keyData == Keys.Tab && boxPass.Focused)
+            {
+                piclock.Image = Properties.Resources.lock1;
+                panel3.BackColor = Color.White;
+                boxPass.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
 
+                if (boxPass.Text == "" || boxPass.Text == "Create a password")
+                {
+                    this.boxPass.PasswordChar = char.MinValue;
+                    boxPass.Text = "Create a password";
+                }
+            }
                 return base.ProcessCmdKey(ref msg, keyData);
         }
 

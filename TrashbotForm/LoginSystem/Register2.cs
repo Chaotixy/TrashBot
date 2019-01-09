@@ -137,6 +137,13 @@ namespace LoginSystem
                 boxAddress.ForeColor = Color.White;
                 label2.ForeColor = Color.White;
             }
+            else if (keyData == Keys.Tab && boxCity.Focused)
+            {
+                piccity.Image = Properties.Resources.city1;
+                panel3.BackColor = Color.White;
+                boxCity.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+            }
 
                 return base.ProcessCmdKey(ref msg, keyData);
         }
