@@ -57,7 +57,7 @@
             this.textBox1.Location = new System.Drawing.Point(86, 183);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(182, 15);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 1;
             this.textBox1.Text = "Username";
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             // 
@@ -86,7 +86,7 @@
             this.textBox2.Location = new System.Drawing.Point(86, 254);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(182, 15);
-            this.textBox2.TabIndex = 6;
+            this.textBox2.TabIndex = 2;
             this.textBox2.Text = "Password";
             this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
@@ -100,7 +100,7 @@
             this.button1.Location = new System.Drawing.Point(60, 333);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(230, 35);
-            this.button1.TabIndex = 9;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Log in";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -116,7 +116,7 @@
             this.button2.Location = new System.Drawing.Point(60, 389);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(230, 35);
-            this.button2.TabIndex = 10;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Register";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -130,7 +130,7 @@
             this.Exit.Location = new System.Drawing.Point(293, -1);
             this.Exit.Name = "Exit";
             this.Exit.Size = new System.Drawing.Size(45, 35);
-            this.Exit.TabIndex = 13;
+            this.Exit.TabIndex = 5;
             this.Exit.Text = "X";
             this.Exit.UseCompatibleTextRendering = true;
             this.Exit.UseVisualStyleBackColor = false;
@@ -204,7 +204,7 @@
             this.CompanyCheck.Location = new System.Drawing.Point(60, 143);
             this.CompanyCheck.Name = "CompanyCheck";
             this.CompanyCheck.Size = new System.Drawing.Size(84, 20);
-            this.CompanyCheck.TabIndex = 48;
+            this.CompanyCheck.TabIndex = 0;
             this.CompanyCheck.TabStop = true;
             this.CompanyCheck.Text = "Company";
             this.CompanyCheck.UseVisualStyleBackColor = true;

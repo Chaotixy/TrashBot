@@ -138,10 +138,26 @@ namespace LoginSystem
             if (keyData == Keys.Tab && textBox1.Focused)
             {
                 textBox2.PasswordChar = '•';
+                piclock.Image = Properties.Resources.lock2;
+                panel2.BackColor = Color.FromArgb(216, 191, 170);
+                textBox2.ForeColor = Color.FromArgb(216, 191, 170);
 
+                picperson.Image = Properties.Resources.person1;
+                panel1.BackColor = Color.White;
+                textBox1.ForeColor = Color.White;
+
+            }if (keyData == Keys.Tab && CompanyCheck.Focused)
+            {
+                picperson.Image = Properties.Resources.person2;
+                panel1.BackColor = Color.FromArgb(216, 191, 170);
+                textBox1.ForeColor = Color.FromArgb(216, 191, 170);
+
+                piclock.Image = Properties.Resources.lock1;
+                panel2.BackColor = Color.White;
+                textBox2.ForeColor = Color.White;
             }
-            
-            return base.ProcessCmdKey(ref msg, keyData);
+
+                return base.ProcessCmdKey(ref msg, keyData);
         }
 
         // When you hit the login button it will check if everything is filled out.
