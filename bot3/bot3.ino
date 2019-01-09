@@ -1,60 +1,60 @@
 #include "MPU6050_tockn.h"
+#include <SPI.h>
+#include <Ethernet.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
-#define trigPin 13
-#define echoPin 12
+#define trigPin1 13
+#define echoPin1 12
+#define trigPin2 14
+#define echoPin2 15
 #define leftWheelUp 3
 #define leftWheelDown 2
 #define rightWheelUp 9
 #define rightWheelDown 4
 
-
-
-
-#define bt_power 7
-#define bt_key_power 8
-SoftwareSerial BT(A0, A1); //setup bluetooth
 int state; //state of the loop
 int line;
 int speed;
-//MPU6050 mpu; 
-//gyro
+
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+ 
+// Enter the IP address for Arduino
+
+IPAddress ip(xxx,xxx,x,xx);
+  
+//Flexi Force
 float var1 = 19.5;    // caliberation factor
 
 int var2 = A0;  // FlexiForce sensor is connected analog pin A0 of arduino 
 
 int var3 = 0;
-float vout;
+float weight; //Flexiforce reading
 
+String bin_state; //This is the Status of the bin IF full or NOt
+
+//Server IP
+char server[] = "81.169.200.100,1433";
+
+//Initializing the Ethernet server library
+EthernetClient client;
+
+//Setup
 void setup() {
-  line = 0;
-  //initiate BT serial at 38400
-  BT.begin(38400);
-  pinMode(bt_power, OUTPUT);
-  pinMode(bt_key_power, OUTPUT);
-  pinMode(var2, INPUT);
-  Serial.begin (9600);
-  digitalWrite(bt_power, LOW);
-  digitalWrite (bt_key_power, LOW);
-  //key low
-  delay(100);
+line = 0;
 
-  //key high
-  digitalWrite(bt_key_power, HIGH);
-
-  delay(100);
-
-  //power BT
-  digitalWrite(bt_power, HIGH);
+pinMode(var2, INPUT); //Flexi force
+Serial.begin (9600);
   
-  pinMode(trigPin, OUTPUT); //ultrasonic sound sensor
-  pinMode(echoPin, INPUT);
-  //mpu.initialize();
-  //gyro
-  
+pinMode(trigPin1, OUTPUT); //ultrasonic sound sensor1
+pinMode(echoPin1, INPUT);
 
-  Wire.begin();
+pinMode(trigPin2, OUTPUT); //ultrasonic sound sensor2
+pinMode(echoPin2, INPUT);
+
+Ethernet.begin(mac, ip); //start the Ethernet connection
+Wire.begin();
 }
+
 // Make the wheels move forward
 void forward() {
   digitalWrite(leftWheelUp, HIGH);
@@ -82,8 +82,8 @@ void right() {
   digitalWrite(rightWheelUp, LOW);  
   digitalWrite(rightWheelDown, HIGH);
 
-  analogWrite(leftWheelUp, 80);
-  analogWrite(rightWheelUp, 80);
+  analogWrite(leftWheelUp, 50);
+  analogWrite(rightWheelUp, 50);
 }
 void backwards() {
   digitalWrite(leftWheelUp, LOW);
@@ -102,64 +102,77 @@ void breaks() {
 }
 
 
- 
-//function to move to the next game
-void autoMode() {
-  forward();
-  delay(6000);
-  left();
-  delay(500);
-  breaks();
-  delay(100);
-  forward();
-  delay(200);
-}
-
 void loop() {
-//Bluetooth
-if(BT.available()>0) {
-  state = BT.read();
-}
 
-//takes input from buttons by the BT device in ASCII
-if(state == 57) //breaks
-{
-breaks();
-} 
+delay(80);
 
-else if(state == 55) { //bump wall game
+//Flexi Force ------- Calculate the weight
+
+var3 = analogRead(var2);
+weight = (var3 * 5.0) / 1023.0;
+weight = weight * var1;
+weight = weight * 100;
+
+//send weight to server
+if (client.connect(server, 80)) {
+    client.print("GET /write_data.php?");
+    client.print("value="); 
+    client.print(weight);
+    client.println(" HTTP/1.1"); // Part of the GET request
+    client.println("Host: DBMSSOCN");
+    client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+    client.println(); //empty line
+    client.stop(); //Closing connection to the server
+else {
+    // If Arduino can't connect to the server 
+    Serial.println("--> connection failed\n");
+  }
+
+delay(10000);
+
+//if full or not ----- Ultrasonic sensor
+
   long duration, distance;
-  digitalWrite(trigPin, LOW);  
+  digitalWrite(trigPin2, LOW);  
   delayMicroseconds(2); 
-  digitalWrite(trigPin, HIGH);
+  digitalWrite(trigPin2, HIGH);
 
   delayMicroseconds(10); 
-  digitalWrite(trigPin, LOW);
-  duration = pulseIn(echoPin, HIGH);
+  digitalWrite(trigPin2, LOW);
+  duration = pulseIn(echoPin2, HIGH);
   distance = (duration/2) / 29.1;
 
-   if(distance > 30) {
+  if (distance >= 0 && distance <= 6.5){
+    //bin full
+    //Send bin state to the server
+    bin_state = "Full";
+
+    //****THIS WILL BE REPLACED BY FOLLOW THE LINE CODE OR ARDUINO CODE****
+    long duration, distance;
+    digitalWrite(trigPin1, LOW);  
+    delayMicroseconds(2); 
+    digitalWrite(trigPin1, HIGH);
+
+    delayMicroseconds(10); 
+    digitalWrite(trigPin1, LOW);
+    duration = pulseIn(echoPin1, HIGH);
+    distance = (duration/2) / 29.1;
+
+    if(distance > 20) {
     forward();
     }
     
-    if (distance >= 0 && distance <= 87){
+    if (distance >= 0 && distance <= 25){
     breaks();
+    delay(1000);
     backwards();
+    delay(150);
     right();
-    right();
+    
     }
- }
-  delay(80);
-
-//Flexi Force
-
-var3 = analogRead(var2);
-vout = (var3 * 5.0) / 1023.0;
-vout = vout * var1;
-vout = vout * 100;
-Serial.print("Flexi Force sensor: ");
-Serial.print(vout,3);
-Serial.println("");
-delay(100);
-}
-  
+  }
+  else {
+    bin_state = "Not full";
+  }
+  delay(10000);
+}  
