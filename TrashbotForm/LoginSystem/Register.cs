@@ -20,6 +20,32 @@ namespace LoginSystem
             InitializeComponent();
         }
 
+
+        // So you can move the form around
+        private bool mouseDown;
+        private Point lastLocation;
+        private void Register_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Register_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void Register_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
         // Makes application icon bigger in taskbar.
         private void Register_Load(object sender, EventArgs e)
         {
@@ -110,7 +136,67 @@ namespace LoginSystem
             }
         }
 
-       
+        // To make sure the password is still hidden after pressing the tab key
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && boxEmail.Focused)
+            {
+                boxPass.PasswordChar = '•';
+                piclock.Image = Properties.Resources.lock2;
+                panel3.BackColor = Color.FromArgb(216, 191, 170);
+                boxPass.ForeColor = Color.FromArgb(216, 191, 170);
+                label3.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picuser.Image = Properties.Resources.person1;
+                panel1.BackColor = Color.White;
+                boxUser.ForeColor = Color.White;
+                label1.ForeColor = Color.White;
+
+                picemail.Image = Properties.Resources.email1;
+                panel2.BackColor = Color.White;
+                boxEmail.ForeColor = Color.White;
+                label2.ForeColor = Color.White;
+
+            }
+            else if (keyData == Keys.Tab && boxUser.Focused)
+            {
+                picemail.Image = Properties.Resources.email2;
+                panel2.BackColor = Color.FromArgb(216, 191, 170);
+                boxEmail.ForeColor = Color.FromArgb(216, 191, 170);
+                label2.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picuser.Image = Properties.Resources.person1;
+                panel1.BackColor = Color.White;
+                boxUser.ForeColor = Color.White;
+                label1.ForeColor = Color.White;
+
+                piclock.Image = Properties.Resources.lock1;
+                panel3.BackColor = Color.White;
+                boxPass.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+            }
+            else if (keyData == Keys.Tab && Exit.Focused)
+            {
+                picuser.Image = Properties.Resources.person2;
+                panel1.BackColor = Color.FromArgb(216, 191, 170);
+                boxUser.ForeColor = Color.FromArgb(216, 191, 170);
+                label1.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picemail.Image = Properties.Resources.email1;
+                panel2.BackColor = Color.White;
+                boxEmail.ForeColor = Color.White;
+                label2.ForeColor = Color.White;
+
+                piclock.Image = Properties.Resources.lock1;
+                panel3.BackColor = Color.White;
+                boxPass.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+            }
+
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
         // Styling for when you click the add-email button.
         private void boxEmail_Click_1(object sender, EventArgs e)
         {
@@ -312,6 +398,8 @@ namespace LoginSystem
             }
         
         }
+
+       
 
         // When you click login button it will take you to login page.
         private void button2_Click(object sender, EventArgs e)

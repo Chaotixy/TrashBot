@@ -8,17 +8,44 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
-
+using System.Data.SqlClient;
+using System.Security.Cryptography;
 
 namespace LoginSystem
 {
     public partial class Register2 : Form
     {
+        private string sql;
         public Register2()
         {
             InitializeComponent();
 
            
+        }
+
+        // So you can move the form around
+        private bool mouseDown;
+        private Point lastLocation;
+        private void Register2_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Register2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void Register2_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
 
         // Makes application icon bigger in taskbar.
@@ -39,9 +66,83 @@ namespace LoginSystem
         }
 
 
+        //Create the hashing process
+        static string HashProcess(string rawData)
+        {
+            
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+               
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+ 
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
 
-        // Styling for when you click the add-fullname box.
-        private void boxUser_Click(object sender, EventArgs e)
+        // To make sure the styling is still there after using the tab key
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && CompanyCheck.Focused)
+            {
+                picuser.Image = Properties.Resources.person2;
+                panel1.BackColor = Color.FromArgb(216, 191, 170);
+                boxUser.ForeColor = Color.FromArgb(216, 191, 170);
+                label1.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picadd.Image = Properties.Resources.address1;
+                panel2.BackColor = Color.White;
+                boxAddress.ForeColor = Color.White;
+                label2.ForeColor = Color.White;
+
+                piccity.Image = Properties.Resources.city1;
+                panel3.BackColor = Color.White;
+                boxCity.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+
+            }else if(keyData == Keys.Tab && boxUser.Focused)
+            {
+                picadd.Image = Properties.Resources.address2;
+                panel2.BackColor = Color.FromArgb(216, 191, 170);
+                boxAddress.ForeColor = Color.FromArgb(216, 191, 170);
+                label2.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picuser.Image = Properties.Resources.person1;
+                panel1.BackColor = Color.White;
+                boxUser.ForeColor = Color.White;
+                label1.ForeColor = Color.White;
+
+                piccity.Image = Properties.Resources.city1;
+                panel3.BackColor = Color.White;
+                boxCity.ForeColor = Color.White;
+                label3.ForeColor = Color.White;
+            }else if (keyData == Keys.Tab && boxAddress.Focused)
+            {
+                piccity.Image = Properties.Resources.city2;
+                panel3.BackColor = Color.FromArgb(216, 191, 170);
+                boxCity.ForeColor = Color.FromArgb(216, 191, 170);
+                label3.ForeColor = Color.FromArgb(216, 191, 170);
+
+                picuser.Image = Properties.Resources.person1;
+                panel1.BackColor = Color.White;
+                boxUser.ForeColor = Color.White;
+                label1.ForeColor = Color.White;
+
+                picadd.Image = Properties.Resources.address1;
+                panel2.BackColor = Color.White;
+                boxAddress.ForeColor = Color.White;
+                label2.ForeColor = Color.White;
+            }
+
+                return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+                // Styling for when you click the add-fullname box.
+                private void boxUser_Click(object sender, EventArgs e)
         {
             if (boxUser.Text == "" || boxUser.Text == "Enter full name" || boxUser.Text == "Enter company name")
             {
@@ -285,6 +386,91 @@ namespace LoginSystem
                 addErr.Text = "* Please enter address";
                 cityErr.Text = "* Please enter city";
             }
+            else
+            {
+                string UserName = Register.UserName;
+                string UserMail = Register.UserMail;
+                string UserPass = Register.UserPass;
+
+                // Hash password
+                string HashPass = HashProcess(UserPass);
+
+
+
+                string FullName = boxUser.Text;
+                string Address = boxAddress.Text;
+                string City = boxCity.Text;
+
+                string con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                             "Initial Catalog = Trashbot; User ID = UserRegister; Password = Test123;";
+                string conLogin = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                             "Initial Catalog = Trashbot; User ID = UserLogin; Password = Test123;";
+                using (SqlConnection cnn = new SqlConnection(conLogin))
+                {
+
+
+                    if (PersonCheck.Checked)
+                    {
+                        sql =
+                            "SELECT Username FROM Home_User WHERE [Username] = @Username;";
+                    }
+
+                    if (CompanyCheck.Checked)
+                    {
+                        sql =
+                            "SELECT Username FROM Trash_Company WHERE [Username] = @Username";
+                    }
+
+                    cnn.Open();
+                    using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", UserName);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        if (dt.Rows.Count > 0)
+                        {
+                            MessageBox.Show("User already exist!");
+                            cnn.Close();
+                        }
+                        else
+                        {
+                            cnn.Close();
+                            using (SqlConnection cnn2 = new SqlConnection(con))
+                            {
+                                if (PersonCheck.Checked)
+                                {
+                                    sql =
+                                        "INSERT INTO Home_User ([Name],[Address],[City],[Email],[Password],[Username]) VALUES (@Fullname,@Address,@City,@Email,@Password,@Username)";
+                                }
+                                if (CompanyCheck.Checked)
+                                {
+                                    sql =
+                                        "INSERT INTO Trash_Company ([Name],[Address],[City],[Username],[Password],[Company_Email]) VALUES (@Fullname,@Address,@City,@Username,@Password,@Email)";
+                                }
+
+                                cnn2.Open();
+                                using (SqlCommand cmd2 = new SqlCommand(sql, cnn2))
+                                {
+                                    cmd2.Parameters.AddWithValue("@Username", UserName);
+                                    cmd2.Parameters.AddWithValue("@Email", UserMail);
+                                    cmd2.Parameters.AddWithValue("@Password", HashPass);
+                                    cmd2.Parameters.AddWithValue("@Fullname", FullName);
+                                    cmd2.Parameters.AddWithValue("@Address", Address);
+                                    cmd2.Parameters.AddWithValue("@City", City);
+
+                                    cmd2.ExecuteNonQuery();
+                                    MessageBox.Show("Registered !! ");
+                                    cnn2.Close();
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+            }
         }
 
         // When you click step back it will take you to login page.
@@ -335,5 +521,7 @@ namespace LoginSystem
             }
 
         }
+
+        
     }
 }
