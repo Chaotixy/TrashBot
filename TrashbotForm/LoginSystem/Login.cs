@@ -137,7 +137,13 @@ namespace LoginSystem
         {
             if (keyData == Keys.Tab && textBox1.Focused)
             {
-                textBox2.PasswordChar = '•';
+                
+                if (textBox2.Text == "" || textBox2.Text == "Password")
+                {
+                    textBox2.Clear();
+                }
+
+                textBox2.PasswordChar = '•';   
                 piclock.Image = Properties.Resources.lock2;
                 panel2.BackColor = Color.FromArgb(216, 191, 170);
                 textBox2.ForeColor = Color.FromArgb(216, 191, 170);
@@ -156,8 +162,21 @@ namespace LoginSystem
                 panel2.BackColor = Color.White;
                 textBox2.ForeColor = Color.White;
             }
+            if (keyData == Keys.Tab && textBox2.Focused)
+            {
+                piclock.Image = Properties.Resources.lock1;
+                panel2.BackColor = Color.White;
+                textBox2.ForeColor = Color.White;
 
-                return base.ProcessCmdKey(ref msg, keyData);
+                if (textBox2.Text == "" || textBox2.Text == "Password")
+                {
+                    this.textBox2.PasswordChar = char.MinValue;
+                    textBox2.Text = "Password";
+                }
+
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         // When you hit the login button it will check if everything is filled out.
