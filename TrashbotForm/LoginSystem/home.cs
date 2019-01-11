@@ -19,19 +19,19 @@ namespace LoginSystem
     {
         
         private int SessionID;
-        private string con, sql;
-        public static string CurrentUser;
+        private string con, sql2;
+        private string CurrentUser;
         public home()
         {
 
             SessionID = Login.SessionUserID;
             con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
-                  "Initial Catalog = Trashbot; User ID = HomeUser; Password = Test123;";
-            sql = "SELECT * FROM Home_USer WHERE [Home_User_ID] = @ID";
+                  "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
+            sql2 = "SELECT * FROM Trash_Company WHERE [Trash_Company_ID] = @ID";
             using (SqlConnection cnn = new SqlConnection(con))
             {
                 cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                using (SqlCommand cmd = new SqlCommand(sql2, cnn))
                 {
                     cmd.Parameters.AddWithValue("@ID", SessionID);
                     SqlDataReader Reader =  cmd.ExecuteReader();
@@ -40,6 +40,7 @@ namespace LoginSystem
                         
                         CurrentUser = Reader["Name"].ToString();
                     }
+                    Reader.Close();
                 }
                 cnn.Close();
                 

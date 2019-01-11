@@ -18,7 +18,7 @@ namespace LoginSystem
 
         private int SessionID;
         private string con, sql;
-        public static string CurrentUser, CurrentAddress, CurrentCity;
+        private string CurrentUser, CurrentAddress, CurrentCity;
 =======
        
 >>>>>>> 5926b1c51edc7481ee3fb7be61e545350b2dc5e8
@@ -43,6 +43,7 @@ namespace LoginSystem
                         CurrentAddress = Reader["Address"].ToString();
                         CurrentCity = Reader["City"].ToString();
                     }
+                    Reader.Close();
                 }
                 cnn.Close();
 
@@ -71,7 +72,6 @@ namespace LoginSystem
         
 
         private void minmax_Click_1(object sender, EventArgs e)
->>>>>>> 5926b1c51edc7481ee3fb7be61e545350b2dc5e8
         {
             if (this.WindowState == FormWindowState.Maximized)
             {
