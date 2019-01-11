@@ -79,13 +79,14 @@
             this.minmax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minmax.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.minmax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
-            this.minmax.Location = new System.Drawing.Point(713, -3);
+            this.minmax.Location = new System.Drawing.Point(715, -4);
             this.minmax.Name = "minmax";
             this.minmax.Size = new System.Drawing.Size(45, 35);
             this.minmax.TabIndex = 17;
             this.minmax.Text = "-";
             this.minmax.UseCompatibleTextRendering = true;
             this.minmax.UseVisualStyleBackColor = false;
+            this.minmax.Click += new System.EventHandler(this.minmax_Click_1);
             // 
             // home_client
             // 
@@ -102,7 +103,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "home_client";
-            this.Text = "home_client";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

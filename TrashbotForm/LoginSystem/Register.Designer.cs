@@ -168,6 +168,7 @@
             this.boxPass.TabIndex = 2;
             this.boxPass.Text = "Create a password";
             this.boxPass.Click += new System.EventHandler(this.boxPass_Click_1);
+            this.boxPass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.boxPass_KeyDown);
             // 
             // panel2
             // 

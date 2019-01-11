@@ -137,6 +137,7 @@
             this.boxCity.TabIndex = 3;
             this.boxCity.Text = "Enter city";
             this.boxCity.Click += new System.EventHandler(this.boxCity_Click);
+            this.boxCity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.boxCity_KeyDown);
             // 
             // boxAddress
             // 

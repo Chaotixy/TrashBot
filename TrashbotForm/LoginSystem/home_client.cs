@@ -13,6 +13,8 @@ namespace LoginSystem
 {
     public partial class home_client : Form
     {
+       
+
         public home_client()
         {
             InitializeComponent();
@@ -26,15 +28,13 @@ namespace LoginSystem
             }
         }
 
-        private void minmax_Click(object sender, EventArgs e)
+        
+
+        private void minmax_Click_1(object sender, EventArgs e)
         {
-            if(this.WindowState == FormWindowState.Maximized)
+            if (this.WindowState == FormWindowState.Maximized)
             {
-                this.WindowState = FormWindowState.Normal;
-                minmax.Text = "+";
-            }else if (this.WindowState == FormWindowState.Normal){
-                this.WindowState = FormWindowState.Maximized;
-                minmax.Text = "-";
+                this.WindowState = FormWindowState.Minimized;
             }
 
         }
