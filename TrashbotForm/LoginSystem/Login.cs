@@ -176,9 +176,19 @@ namespace LoginSystem
                 }
 
             }
+            
 
-            return base.ProcessCmdKey(ref msg, keyData);
+                return base.ProcessCmdKey(ref msg, keyData);
         }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter && textBox2.Focused)
+            {
+                button1_Click(sender, e);
+            }
+        }
+
 
         // When you hit the login button it will check if everything is filled out.
         private void button1_Click(object sender, EventArgs e)
@@ -273,7 +283,7 @@ namespace LoginSystem
                                 
                             }
 
-                            MessageBox.Show("Success! You are Customer:"+SessionUserID);
+                            
                             this.Hide();
                             home index = new home();
                             index.Show();
@@ -312,6 +322,6 @@ namespace LoginSystem
 
         }
 
-        
+       
     }
 }
