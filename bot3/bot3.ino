@@ -1,12 +1,19 @@
+#ifndef __CREDENTIALS_H__
+#define __CREDENTIALS_H__
+char passphrase[] = "hallo1234"; //password Wi-Fi
+char ssid[] = "Tims iPhone"; //name Wi-Fi
+#endif
+
 #include "MPU6050_tockn.h"
 #include <SPI.h>
 #include <Ethernet.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
+#include "WiFly/WiFly.h"
 #define trigPin1 13
 #define echoPin1 12
-#define trigPin2 14
-#define echoPin2 15
+#define trigPin2 11
+#define echoPin2 10
 #define leftWheelUp 3
 #define leftWheelDown 2
 #define rightWheelUp 9
@@ -20,7 +27,7 @@ byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
  
 // Enter the IP address for Arduino
 
-IPAddress ip(xxx,xxx,x,xx);
+//IPAddress ip(xxx,xxx,x,xx)
   
 //Flexi Force
 float var1 = 19.5;    // caliberation factor
@@ -33,10 +40,8 @@ float weight; //Flexiforce reading
 String bin_state; //This is the Status of the bin IF full or NOt
 
 //Server IP
-char server[] = "81.169.200.100,1433";
+Client client( "81.169.200.100", 1433 );
 
-//Initializing the Ethernet server library
-EthernetClient client;
 
 //Setup
 void setup() {
@@ -51,8 +56,19 @@ pinMode(echoPin1, INPUT);
 pinMode(trigPin2, OUTPUT); //ultrasonic sound sensor2
 pinMode(echoPin2, INPUT);
 
-Ethernet.begin(mac, ip); //start the Ethernet connection
-Wire.begin();
+WiFly.begin();
+
+//connecting to network
+
+if( !WiFly.join( ssid, passphrase ) )
+{
+Serial.println( "Association failed." );
+
+while( 1 )
+{
+// Hang on failure.
+}
+}
 }
 
 // Make the wheels move forward
@@ -114,7 +130,7 @@ weight = weight * var1;
 weight = weight * 100;
 
 //send weight to server
-if (client.connect(server, 80)) {
+if (client.connect()) {
     client.print("GET /write_data.php?");
     client.print("value="); 
     client.print(weight);
@@ -149,7 +165,7 @@ delay(10000);
     bin_state = "Full";
 	
 	//send bin state to server
-	if (client.connect(server, 80)) {
+	if (client.connect()) {
 		client.print("GET /write_data.php?");
 		client.print("value="); 
 		client.print(bin_state);
@@ -167,26 +183,6 @@ delay(10000);
 	delay(10000);
 	
 	//INSERT GYRO CODE HERE//
-  }
-  else {
-    bin_state = "Not full";
-	
-	//send bin state to server
-	if (client.connect(server, 80)) {
-		client.print("GET /write_data.php?");
-		client.print("value="); 
-		client.print(bin_state);
-		client.println(" HTTP/1.1"); // Part of the GET request
-		client.println("Host: 81.169.200.100,1433");
-		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
-		client.println(); //empty line
-		client.stop(); //Closing connection to the server
-	}
-	else {
-    // If Arduino can't connect to the server 
-		Serial.println("--> connection failed\n");
-	}
-
-	delay(10000);
+ 
   }
 }  
