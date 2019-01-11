@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
-namespace WindowsFormsApp3
+namespace LoginSystem
 {
-    public partial class Form1 : Form
+    public partial class home : Form
     {
-        public Form1()
+        public home()
         {
             InitializeComponent();
             map.MapProvider = GMapProviders.GoogleMap;
@@ -29,6 +30,15 @@ namespace WindowsFormsApp3
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Exit_Click(object sender, EventArgs e)
+        {
+
+            foreach (var process in Process.GetProcessesByName("LoginSystem"))
+            {
+                process.Kill();
+            }
         }
     }
 }

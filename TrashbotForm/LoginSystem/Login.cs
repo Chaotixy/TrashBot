@@ -274,6 +274,9 @@ namespace LoginSystem
                             }
 
                             MessageBox.Show("Success! You are Customer:"+SessionUserID);
+                            this.Hide();
+                            home index = new home();
+                            index.Show();
                         }
 
                         else
