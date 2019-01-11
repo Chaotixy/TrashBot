@@ -84,6 +84,15 @@ namespace LoginSystem
             }
         }
 
+        //Runs the code as if register button is clicked when pressing enter
+        private void boxCity_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && boxCity.Focused)
+            {
+                button1_Click(sender, e);
+            }
+        }
+
         // To make sure the styling is still there after using the tab key
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -469,6 +478,11 @@ namespace LoginSystem
                                     cmd2.ExecuteNonQuery();
                                     MessageBox.Show("Registered !! ");
                                     cnn2.Close();
+
+                                    this.Hide();
+                                    Login login = new Login();
+                                    login.Show();
+
                                 }
                             }
 

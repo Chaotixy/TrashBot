@@ -183,6 +183,7 @@ namespace LoginSystem
                 return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        //Runs the code as if login button is clicked when pressing enter
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter && textBox2.Focused)

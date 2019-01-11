@@ -68,6 +68,19 @@ namespace LoginSystem
 
         }
 
+        //Runs the code as if next step button is clicked when pressing enter
+        private void boxPass_KeyDown(object sender, KeyEventArgs e)
+        {
+
+
+            if (e.KeyCode == Keys.Enter && boxPass.Focused)
+            {
+                button1_Click(sender, e);
+            }
+
+        }
+
+
         // Styling for when you click the add-username box.
         private void boxUser_Click(object sender, EventArgs e)
         {
@@ -417,6 +430,8 @@ namespace LoginSystem
         }
 
        
+
+
 
         // When you click login button it will take you to login page.
         private void button2_Click(object sender, EventArgs e)
