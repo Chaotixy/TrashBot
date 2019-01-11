@@ -194,14 +194,13 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Agency FB", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(49)))), ((int)(((byte)(49)))));
+            this.label3.Font = new System.Drawing.Font("Agency FB", 22F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(191)))), ((int)(((byte)(170)))));
-            this.label3.Location = new System.Drawing.Point(144, 132);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(149, 143);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(121, 63);
+            this.label3.Size = new System.Drawing.Size(0, 53);
             this.label3.TabIndex = 16;
-            this.label3.Text = "Label";
             // 
             // home
             // 
@@ -230,6 +229,7 @@
             this.Name = "home";
             this.Text = "Trash Bot";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.home_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.home_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.home_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.home_MouseUp);

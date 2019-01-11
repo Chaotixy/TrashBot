@@ -19,14 +19,15 @@ namespace LoginSystem
     {
         
         private int SessionID;
-        private string con, sql, CurrentUser, msg;
+        private string con, sql;
+        public static string CurrentUser;
         public home()
         {
 
             SessionID = Login.SessionUserID;
             con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
-                  "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
-            sql = "SELECT Name FROM Trash_Company WHERE [Trash_Company_ID] = @ID";
+                  "Initial Catalog = Trashbot; User ID = HomeUser; Password = Test123;";
+            sql = "SELECT * FROM Home_USer WHERE [Home_User_ID] = @ID";
             using (SqlConnection cnn = new SqlConnection(con))
             {
                 cnn.Open();
@@ -36,12 +37,9 @@ namespace LoginSystem
                     SqlDataReader Reader =  cmd.ExecuteReader();
                     while (Reader.Read())
                     {
-                       CurrentUser = Reader[0].ToString();
+                        
+                        CurrentUser = Reader["Name"].ToString();
                     }
-                    
-                    MessageBox.Show("Welcome: " + CurrentUser.ToString());
-                    
-
                 }
                 cnn.Close();
                 
@@ -61,6 +59,7 @@ namespace LoginSystem
         private bool mouseDown;
         private Point lastLocation;
 
+        
 
         private void home_MouseDown(object sender, MouseEventArgs e)
         {
@@ -88,6 +87,11 @@ namespace LoginSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void home_Load(object sender, EventArgs e)
+        {
+            label3.Text ="Welcome, " + CurrentUser + "!";
         }
 
         private void Exit_Click(object sender, EventArgs e)
