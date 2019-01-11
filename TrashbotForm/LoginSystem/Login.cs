@@ -26,7 +26,9 @@ namespace LoginSystem
 
         private static int attempt = 3;
         private string sql;
-        int SessionUserID;
+        public static int SessionUserID, SID;
+
+
         public Login()
         {
             InitializeComponent();
@@ -270,6 +272,7 @@ namespace LoginSystem
                                 {
                                     SessionUserID =  (int)IDRdr["Trash_Company_ID"];
                                 }
+
                             }
 
                             if (PersonCheck.Checked)
@@ -286,15 +289,18 @@ namespace LoginSystem
 
                             if (CompanyCheck.Checked)
                             {
+                                SID = SessionUserID;
                                 this.Hide();
                                 home index = new home();
                                 index.Show();
                             }else if (PersonCheck.Checked)
                             {
+                                SID = SessionUserID;
                                 this.Hide();
                                 home_client index_client = new home_client();
                                 index_client.Show();
                             }
+
                         }
 
                         else
@@ -302,7 +308,7 @@ namespace LoginSystem
                                 MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
                                 --attempt;
                             }
-
+                        
                             cnn.Close();
 
                         }

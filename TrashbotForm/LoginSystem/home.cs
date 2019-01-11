@@ -10,13 +10,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Data.Sql;
+using System.Data.SqlClient;
 
 namespace LoginSystem
 {
     public partial class home : Form
     {
+        
+        private int SessionID;
+        private string con, sql, CurrentUser, msg;
         public home()
         {
+
+            SessionID = Login.SessionUserID;
+            con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                  "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
+            sql = "SELECT Name FROM Trash_Company WHERE [Trash_Company_ID] = @ID";
+            using (SqlConnection cnn = new SqlConnection(con))
+            {
+                cnn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, cnn))
+                {
+                    cmd.Parameters.AddWithValue("@ID", SessionID);
+                    SqlDataReader Reader =  cmd.ExecuteReader();
+                    while (Reader.Read())
+                    {
+                       CurrentUser = Reader[0].ToString();
+                    }
+                    
+                    MessageBox.Show("Welcome: " + CurrentUser.ToString());
+                    
+
+                }
+                cnn.Close();
+                
+            }
+            
             InitializeComponent();
             map.MapProvider = GMapProviders.GoogleMap;
             map.Position = new PointLatLng(52.786435, 6.8894953);
