@@ -283,10 +283,17 @@ namespace LoginSystem
                                 
                             }
 
-                            
-                            this.Hide();
-                            home index = new home();
-                            index.Show();
+                            if (CompanyCheck.Checked)
+                            {
+                                this.Hide();
+                                home index = new home();
+                                index.Show();
+                            }else if (PersonCheck.Checked)
+                            {
+                                this.Hide();
+                                home_client index_client = new home_client();
+                                index_client.Show();
+                            }
                         }
 
                         else
