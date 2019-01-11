@@ -61,6 +61,7 @@
             this.button1.Font = new System.Drawing.Font("Agency FB", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(547, 52);
             this.button1.Name = "button1";
+            this.button1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.button1.Size = new System.Drawing.Size(230, 45);
             this.button1.TabIndex = 6;
             this.button1.Text = "Log Out";
@@ -200,6 +201,10 @@
             this.MinimizeBox = false;
             this.Name = "home";
             this.Text = "Trash Bot";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.home_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.home_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.home_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
