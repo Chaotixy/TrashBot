@@ -1,35 +1,24 @@
-#ifndef __CREDENTIALS_H__
-#define __CREDENTIALS_H__
-char passphrase[] = "hallo1234"; //password Wi-Fi
-char ssid[] = "Tims iPhone"; //name Wi-Fi
-#endif
 
 #include "MPU6050_tockn.h"
 #include <SPI.h>
-#include <Ethernet.h>
 #include <SoftwareSerial.h>
 #include <Wire.h>
-#include "WiFly/WiFly.h"
+#include "WiFly.h"
+
 #define trigPin1 13
 #define echoPin1 12
 #define trigPin2 11
 #define echoPin2 10
 #define leftWheelUp 3
 #define leftWheelDown 2
-#define rightWheelUp 9
+#define rightWheelUp 5
 #define rightWheelDown 4
 
 int state; //state of the loop
 int line;
 int speed;
-
-byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
  
-// Enter the IP address for Arduino
 
-//IPAddress ip(xxx,xxx,x,xx)
-  
-//Flexi Force
 float var1 = 19.5;    // caliberation factor
 
 int var2 = A0;  // FlexiForce sensor is connected analog pin A0 of arduino 
@@ -38,9 +27,6 @@ int var3 = 0;
 float weight; //Flexiforce reading
 
 String bin_state; //This is the Status of the bin IF full or NOt
-
-//Server IP
-Client client( "81.169.200.100", 1433 );
 
 
 //Setup
@@ -58,18 +44,8 @@ pinMode(echoPin2, INPUT);
 
 WiFly.begin();
 
-//connecting to network
+}
 
-if( !WiFly.join( ssid, passphrase ) )
-{
-Serial.println( "Association failed." );
-
-while( 1 )
-{
-// Hang on failure.
-}
-}
-}
 
 // Make the wheels move forward
 void forward() {
@@ -117,10 +93,8 @@ void breaks() {
   digitalWrite(rightWheelDown, LOW);
 }
 
-
 void loop() {
 
-delay(80);
 
 //Flexi Force ------- Calculate the weight
 
@@ -130,20 +104,20 @@ weight = weight * var1;
 weight = weight * 100;
 
 //send weight to server
-if (client.connect()) {
-    client.print("GET /write_data.php?");
-    client.print("value="); 
-    client.print(weight);
-    client.println(" HTTP/1.1"); // Part of the GET request
-    client.println("Host: 81.169.200.100,1433");
-    client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
-    client.println(); //empty line
-    client.stop(); //Closing connection to the server
-}
-else {
-    // If Arduino can't connect to the server 
-    Serial.println("--> connection failed\n");
-  }
+//if (client.connect()) {
+//    client.print("GET /write_data.php?");
+//    client.print("value="); 
+//    client.print(weight);
+//    client.println(" HTTP/1.1"); // Part of the GET request
+//    client.println("Host: 81.169.200.100,1433");
+//    client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+//    client.println(); //empty line
+//    client.stop(); //Closing connection to the server
+//}
+//else {
+//    // If Arduino can't connect to the server 
+//    Serial.println("--> connection failed\n");
+//  }
 
 delay(10000);
 
@@ -161,24 +135,23 @@ delay(10000);
 
   if (distance >= 0 && distance <= 6.5){
     //bin full
-    //Send bin state to the server
     bin_state = "Full";
 	
-	//send bin state to server
-	if (client.connect()) {
-		client.print("GET /write_data.php?");
-		client.print("value="); 
-		client.print(bin_state);
-		client.println(" HTTP/1.1"); // Part of the GET request
-		client.println("Host: 81.169.200.100,1433");
-		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
-		client.println(); //empty line
-		client.stop(); //Closing connection to the server
-	}
-	else {
-    // If Arduino can't connect to the server 
-		Serial.println("--> connection failed\n");
-	}
+//	send bin state to server
+//	if (client.connect()) {
+//		client.print("GET /write_data.php?");
+//		client.print("value="); 
+//		client.print(bin_state);
+//		client.println(" HTTP/1.1"); // Part of the GET request
+//    client.println("Host: 81.169.200.100,1433");
+//		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+//		client.println(); //empty line
+//		client.stop(); //Closing connection to the server
+//	}
+//	else {
+//    // If Arduino can't connect to the server 
+//		Serial.println("--> connection failed\n");
+//	}
 
 	delay(10000);
 	
