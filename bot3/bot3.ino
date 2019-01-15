@@ -9,14 +9,18 @@
 #define echoPin1 12
 #define trigPin2 11
 #define echoPin2 10
-#define leftWheelUp 3
-#define leftWheelDown 2
-#define rightWheelUp 5
-#define rightWheelDown 4
+
+int IN4 = 3;
+int IN3 = 2;
+int IN2 = 5;
+int IN1 = 4;
 
 int state; //state of the loop
 int line;
 int speed;
+
+long duration;
+long distance;
  
 
 float var1 = 19.5;    // caliberation factor
@@ -42,6 +46,11 @@ pinMode(echoPin1, INPUT);
 pinMode(trigPin2, OUTPUT); //ultrasonic sound sensor2
 pinMode(echoPin2, INPUT);
 
+pinMode(IN4, OUTPUT);
+pinMode(IN3, OUTPUT);
+pinMode(IN2, OUTPUT);
+pinMode(IN1, OUTPUT);
+
 WiFly.begin();
 
 }
@@ -49,48 +58,50 @@ WiFly.begin();
 
 // Make the wheels move forward
 void forward() {
-  digitalWrite(leftWheelUp, HIGH);
-  digitalWrite(leftWheelDown, LOW);
-  digitalWrite(rightWheelUp, HIGH);
-  digitalWrite(rightWheelDown, LOW);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN1, LOW);
 
-  analogWrite(leftWheelUp, 70);
-  analogWrite(rightWheelUp, 70);
+  analogWrite(IN4, 70);
+  analogWrite(IN2, 70);
 }
 // Make the Wheels move Left
 void left() {
-  digitalWrite(leftWheelUp, LOW);
-  digitalWrite(leftWheelDown, HIGH);
-  digitalWrite(rightWheelUp, HIGH);  
-  digitalWrite(rightWheelDown, LOW);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN1, LOW);
 
-  analogWrite(leftWheelUp, 80);
-  analogWrite(rightWheelUp, 80);
+  analogWrite(IN4, 70);
+  analogWrite(IN2, 70);
 }
 // Make the wheels move right
 void right() {
-  digitalWrite(leftWheelUp, HIGH);
-  digitalWrite(leftWheelDown, LOW);
-  digitalWrite(rightWheelUp, LOW);  
-  digitalWrite(rightWheelDown, HIGH);
+  digitalWrite(IN4, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN1, HIGH);
 
-  analogWrite(leftWheelUp, 50);
-  analogWrite(rightWheelUp, 50);
+  analogWrite(IN4, 70);
+  analogWrite(IN2, 70);
 }
+
 void backwards() {
-  digitalWrite(leftWheelUp, LOW);
-  digitalWrite(leftWheelDown, HIGH);
-  digitalWrite(rightWheelUp, LOW);  
-  digitalWrite(rightWheelDown, HIGH);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN1, HIGH);
 
-  analogWrite(leftWheelUp, 70);
-  analogWrite(rightWheelUp, 70);
+  analogWrite(IN4, 70);
+  analogWrite(IN2, 70);
 }
+
 void breaks() {
-  digitalWrite(leftWheelUp, LOW);
-  digitalWrite(leftWheelDown, LOW);
-  digitalWrite(rightWheelUp, LOW);
-  digitalWrite(rightWheelDown, LOW);
+  digitalWrite(IN4, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN1, LOW);
 }
 
 void loop() {
@@ -98,10 +109,10 @@ void loop() {
 
 //Flexi Force ------- Calculate the weight
 
-var3 = analogRead(var2);
-weight = (var3 * 5.0) / 1023.0;
-weight = weight * var1;
-weight = weight * 100;
+//var3 = analogRead(var2);
+//weight = (var3 * 5.0) / 1023.0;
+//weight = weight * var1;
+//weight = weight * 100;
 
 //send weight to server
 //if (client.connect()) {
@@ -119,7 +130,7 @@ weight = weight * 100;
 //    Serial.println("--> connection failed\n");
 //  }
 
-delay(10000);
+//delay(10000);
 
 //if full or not ----- Ultrasonic sensor
 
@@ -133,9 +144,12 @@ delay(10000);
   duration = pulseIn(echoPin2, HIGH);
   distance = (duration/2) / 29.1;
 
-  if (distance >= 0 && distance <= 6.5){
+  Serial.print("Distance: ");
+  Serial.println(distance);
+
+  // if (distance >= 0 && distance <= 6.5){
     //bin full
-    bin_state = "Full";
+    // bin_state = "Full";
 	
 //	send bin state to server
 //	if (client.connect()) {
@@ -153,9 +167,9 @@ delay(10000);
 //		Serial.println("--> connection failed\n");
 //	}
 
-	delay(10000);
+	// delay(10000);
 	
 	//INSERT GYRO CODE HERE//
  
-  }
+  // }
 }  
