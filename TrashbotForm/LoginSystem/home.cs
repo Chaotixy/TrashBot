@@ -12,7 +12,8 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Data.Sql;
 using System.Data.SqlClient;
-
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 namespace LoginSystem
 {
     public partial class home : Form
@@ -49,11 +50,22 @@ namespace LoginSystem
             InitializeComponent();
             map.MapProvider = GMapProviders.GoogleMap;
             map.Position = new PointLatLng(52.786435, 6.8894953);
-            map.MinZoom = 1;
-            map.MaxZoom = 25;
-            map.Zoom = 18; //current zoom
+            map.MinZoom = 5; //minimum
+            map.MaxZoom = 100; //maximum zoom
+            map.Zoom = 10; //current zoom
             map.MouseWheelZoomEnabled = true;
             map.DragButton = MouseButtons.Left;
+
+            // Plot Marker
+            PointLatLng point = new PointLatLng();// Put Sql Statement to select :)
+            GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+
+            // Create Overlay
+            GMapOverlay markers = new GMapOverlay("markers");
+            // Add Overlay
+            markers.Markers.Add(marker);
+            // Cover map
+            map.Overlays.Add(markers);
         }
 
         // So you can move the form around
