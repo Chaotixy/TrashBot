@@ -246,74 +246,82 @@ namespace LoginSystem
                         sql =
                             "SELECT Username, Password, Trash_Company_ID FROM Trash_Company WHERE [Username] = @Username AND [Password] = @Password";
                     }
-
-                    cnn.Open();
-                    using (SqlCommand cmd = new SqlCommand(sql, cnn))
-                    {
-                        cmd.Parameters.AddWithValue("@Username", UserName);
-                        cmd.Parameters.AddWithValue("@Password", PassWord);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-                        if (dt.Rows.Count > 0)
+                    
+                        cnn.Open();
+                        using (SqlCommand cmd = new SqlCommand(sql, cnn))
                         {
+                            cmd.Parameters.AddWithValue("@Username", UserName);
+                            cmd.Parameters.AddWithValue("@Password", PassWord);
 
-
-                            attempt = 3;
-                            //Create a Session via grabbing ID of Tables
-                            if (CompanyCheck.Checked)
+                            SqlDataAdapter da = new SqlDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            if (dt.Rows.Count > 0)
                             {
-                                //Create a Reader to get the ID
-                                SqlDataReader IDRdr = null;
 
-                                IDRdr = cmd.ExecuteReader();
-                                while (IDRdr.Read())
+
+                                attempt = 3;
+                                //Create a Session via grabbing ID of Tables
+                                if (CompanyCheck.Checked)
                                 {
-                                    SessionUserID =  (int)IDRdr["Trash_Company_ID"];
+                                    //Create a Reader to get the ID
+                                    SqlDataReader IDRdr = null;
+
+                                    IDRdr = cmd.ExecuteReader();
+                                    while (IDRdr.Read())
+                                    {
+                                        SessionUserID = (int)IDRdr["Trash_Company_ID"];
+                                    }
+
+                                }
+
+                                if (PersonCheck.Checked)
+                                {
+                                    SqlDataReader IDRdr = null;
+
+                                    IDRdr = cmd.ExecuteReader();
+                                    while (IDRdr.Read())
+                                    {
+                                        SessionUserID = (int)IDRdr["Home_User_ID"];
+                                    }
+
+                                }
+
+                                if (CompanyCheck.Checked)
+                                {
+                                    SID = SessionUserID;
+                                    this.Hide();
+
+                                    home index = new home();
+                                    cnn.Close();
+                                    index.Show();
+
+                                }
+                                else if (PersonCheck.Checked)
+                                {
+                                    SID = SessionUserID;
+                                    this.Hide();
+
+                                    home_client index_client = new home_client();
+                                    cnn.Close();
+                                    index_client.Show();
                                 }
 
                             }
 
-                            if (PersonCheck.Checked)
-                            {
-                                SqlDataReader IDRdr = null;
-
-                                IDRdr = cmd.ExecuteReader();
-                                while (IDRdr.Read())
-                                {
-                                    SessionUserID = (int)IDRdr["Home_User_ID"];
-                                }
-                                
-                            }
-
-                            if (CompanyCheck.Checked)
-                            {
-                                SID = SessionUserID;
-                                this.Hide();
-                                home index = new home();
-                                index.Show();
-                            }else if (PersonCheck.Checked)
-                            {
-                                SID = SessionUserID;
-                                this.Hide();
-                                home_client index_client = new home_client();
-                                index_client.Show();
-                            }
-
-                        }
-
-                        else
+                            else
                             {
                                 MessageBox.Show("Fail: " + Convert.ToString(attempt) + " Attempts left!");
                                 --attempt;
                             }
-                        
-                            
+
+
 
                         }
-                    cnn.Close();
-                }
+                        cnn.Close();
+                    }
+                    
+                
                 
 
 
