@@ -19,34 +19,42 @@ namespace LoginSystem
     public partial class home : Form
     {
         
-        private int SessionID;
-        private string con, sql2;
-        private string CurrentUser;
+        private static int SessionID;
+        private string sql2;
+        string con2 = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
+                  "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
+        private int x, y;
+        private string CurrentUser,currentx;
         public home()
         {
 
-            SessionID = Login.SessionUserID;
-            con = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
-                  "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
-            sql2 = "SELECT * FROM Trash_Company WHERE [Trash_Company_ID] = @ID";
-            using (SqlConnection cnn = new SqlConnection(con))
+            SessionID = Login.SID;
+            
+            sql2 = "SELECT * FROM Trash_Company,Robot WHERE [Trash_Company_ID] = @ID";
+            using (SqlConnection cnn2 = new SqlConnection(con2))
             {
-                cnn.Open();
-                using (SqlCommand cmd = new SqlCommand(sql2, cnn))
+                cnn2.Open();
+                
+                using (SqlCommand cmd2 = new SqlCommand(sql2, cnn2))
                 {
-                    cmd.Parameters.AddWithValue("@ID", SessionID);
-                    SqlDataReader Reader =  cmd.ExecuteReader();
+                    cmd2.Parameters.AddWithValue("@ID", SessionID);
+                    SqlDataReader Reader =  cmd2.ExecuteReader();
                     while (Reader.Read())
                     {
                         
                         CurrentUser = Reader["Name"].ToString();
+                        x = (int)Reader["XCoord"];
+                        y = (int)Reader["YCoord"];
+                        currentx = Reader["XCoord"].ToString();
                     }
                     Reader.Close();
                 }
-                cnn.Close();
+                cnn2.Close();
+                
                 
             }
-            
+           
+
             InitializeComponent();
             map.MapProvider = GMapProviders.GoogleMap;
             map.Position = new PointLatLng(52.786435, 6.8894953);
@@ -57,7 +65,7 @@ namespace LoginSystem
             map.DragButton = MouseButtons.Left;
 
             // Plot Marker
-            PointLatLng point = new PointLatLng();// Put Sql Statement to select :)
+            PointLatLng point = new PointLatLng(x,y);// Put Sql Statement to select :)
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
 
             // Create Overlay
@@ -104,7 +112,8 @@ namespace LoginSystem
 
         private void home_Load(object sender, EventArgs e)
         {
-            label3.Text ="Welcome, " + CurrentUser + "!";
+            label3.Text ="Welcome, " + CurrentUser + "! X=" + currentx +" Y= " + y+ SessionID;
+
         }
 
         private void Exit_Click(object sender, EventArgs e)

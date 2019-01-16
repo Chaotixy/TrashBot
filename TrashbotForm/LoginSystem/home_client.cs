@@ -14,14 +14,12 @@ namespace LoginSystem
 {
     public partial class home_client : Form
     {
-<<<<<<< HEAD
+
 
         private int SessionID;
         private string con, sql;
         private string CurrentUser, CurrentAddress, CurrentCity;
-=======
-       
->>>>>>> 5926b1c51edc7481ee3fb7be61e545350b2dc5e8
+
 
         public home_client()
         {
@@ -59,7 +57,7 @@ namespace LoginSystem
             }
         }
 
-<<<<<<< HEAD
+
         private void home_client_Load(object sender, EventArgs e)
         {
             label2.Text = "Welcome, " + CurrentUser + "!";
@@ -68,7 +66,7 @@ namespace LoginSystem
         }
 
         private void minmax_Click(object sender, EventArgs e)
-=======
+        { }
         
 
         private void minmax_Click_1(object sender, EventArgs e)
