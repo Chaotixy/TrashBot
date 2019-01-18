@@ -1,3 +1,7 @@
+//#ifndef __CREDENTIALS_H__
+//#define __CREDENTIALS_H__
+//char passphrase[] = "pass_WIFI"; //password Wi-Fi
+//char ssid[] = "name_WIFI"; //name Wi-Fi
 
 #include "MPU6050_tockn.h"
 #include <SPI.h>
@@ -109,28 +113,28 @@ void loop() {
 
 //Flexi Force ------- Calculate the weight
 
-//var3 = analogRead(var2);
-//weight = (var3 * 5.0) / 1023.0;
-//weight = weight * var1;
-//weight = weight * 100;
+var3 = analogRead(var2);
+weight = (var3 * 5.0) / 1023.0;
+weight = weight * var1;
+weight = weight * 100;
 
 //send weight to server
-//if (client.connect()) {
-//    client.print("GET /write_data.php?");
-//    client.print("value="); 
-//    client.print(weight);
-//    client.println(" HTTP/1.1"); // Part of the GET request
-//    client.println("Host: 81.169.200.100,1433");
-//    client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
-//    client.println(); //empty line
-//    client.stop(); //Closing connection to the server
-//}
-//else {
-//    // If Arduino can't connect to the server 
-//    Serial.println("--> connection failed\n");
-//  }
+if (client.connect()) {
+    client.print("GET /write_data.php?");
+    client.print("value="); 
+    client.print(weight);
+    client.println(" HTTP/1.1"); // Part of the GET request
+    client.println("Host: 81.169.200.100,1433");
+    client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+    client.println(); //empty line
+    client.stop(); //Closing connection to the server
+}
+else {
+     If Arduino can't connect to the server 
+    Serial.println("--> connection failed\n");
+    }
 
-//delay(10000);
+delay(10000);
 
 //if full or not ----- Ultrasonic sensor
 
@@ -147,27 +151,27 @@ void loop() {
   Serial.print("Distance: ");
   Serial.println(distance);
 
-  // if (distance >= 0 && distance <= 6.5){
+   if (distance >= 0 && distance <= 6.5){
     //bin full
-    // bin_state = "Full";
+     bin_state = "Full";
 	
 //	send bin state to server
-//	if (client.connect()) {
-//		client.print("GET /write_data.php?");
-//		client.print("value="); 
-//		client.print(bin_state);
-//		client.println(" HTTP/1.1"); // Part of the GET request
-//    client.println("Host: 81.169.200.100,1433");
-//		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
-//		client.println(); //empty line
-//		client.stop(); //Closing connection to the server
-//	}
-//	else {
-//    // If Arduino can't connect to the server 
-//		Serial.println("--> connection failed\n");
-//	}
+	if (client.connect()) {
+		client.print("GET /write_data.php?");
+		client.print("value="); 
+		client.print(bin_state);
+		client.println(" HTTP/1.1"); // Part of the GET request
+    client.println("Host: 81.169.200.100,1433");
+		client.println("Connection: close"); // Part of the GET request telling the server that we are over transmitting the message
+		client.println(); //empty line
+		client.stop(); //Closing connection to the server
+	}
+	else {
+    // If Arduino can't connect to the server 
+		Serial.println("--> connection failed\n");
+	}
 
-	// delay(10000);
+	 delay(10000);
 	
 	//INSERT GYRO CODE HERE//
  
