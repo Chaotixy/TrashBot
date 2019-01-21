@@ -239,6 +239,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\binfull.png" />
+    <None Include="Resources\binempty.png" />
     <None Include="Resources\city2.png" />
     <None Include="Resources\address2.png" />
     <None Include="Resources\city1.png" />
