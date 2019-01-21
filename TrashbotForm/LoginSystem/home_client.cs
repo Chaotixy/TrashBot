@@ -18,7 +18,7 @@ namespace LoginSystem
 
         private int SessionID;
         private string con, sql;
-        private string CurrentUser, CurrentAddress, CurrentCity;
+        private string CurrentUser, CurrentAddress, CurrentCity, Robot;
 
 
         public home_client()
@@ -40,6 +40,7 @@ namespace LoginSystem
                         CurrentUser = Reader["Name"].ToString();
                         CurrentAddress = Reader["Address"].ToString();
                         CurrentCity = Reader["City"].ToString();
+                        Robot = Reader["RobotID"].ToString();
                     }
                     Reader.Close();
                 }
@@ -49,14 +50,12 @@ namespace LoginSystem
             InitializeComponent();
         }
 
-        private void Exit_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var process in Process.GetProcessesByName("LoginSystem"))
-            {
-                process.Kill();
-            }
+            this.Hide();
+            Login login = new Login();
+            login.Show();
         }
-
 
         private void home_client_Load(object sender, EventArgs e)
         {
@@ -64,9 +63,6 @@ namespace LoginSystem
             label3.Text = "Address: " + CurrentAddress;
             label4.Text = "City: " +CurrentCity;
         }
-
-        private void minmax_Click(object sender, EventArgs e)
-        { }
         
 
         private void minmax_Click_1(object sender, EventArgs e)
