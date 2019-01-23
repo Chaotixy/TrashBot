@@ -25,18 +25,19 @@ namespace LoginSystem
         private string sql2;
         string con2 = "Data Source = 81.169.200.100,1433; Network Library = DBMSSOCN;" +
                   "Initial Catalog = Trashbot; User ID = CompanyUser; Password = Test123;";
-        private float  y;
+        private float  y,x;
+        List<float> coords = new List<float>();
         private string CurrentUser;
         public home()
         {
 
             SessionID = Login.SID;
 
-            ArrayList xcoords = new ArrayList();
-            ArrayList ycoords = new ArrayList();
+            
 
             sql2 = "SELECT * FROM Trash_Company, Robot WHERE Trash_Company.[Trash_Company_ID] = @ID AND Robot.[Trash_Company_ID]= @ID";
-            
+            try
+            {
                 using (SqlConnection cnn2 = new SqlConnection(con2))
                 {
 
@@ -44,26 +45,32 @@ namespace LoginSystem
 
                     using (SqlCommand cmd2 = new SqlCommand(sql2, cnn2))
                     {
+
                         cmd2.Parameters.AddWithValue("@ID", SessionID);
                         SqlDataReader Reader2 = cmd2.ExecuteReader();
-                        while (Reader2.Read())
+                        for (int i = 0; Reader2.Read() == true; i++)
                         {
-
                             CurrentUser = Reader2["Name"].ToString();
-                            xcoords.Add((float)Reader2["XCoord"]);
-                            ycoords.Add((float)Reader2["YCoord"]);
+                            float test = (float)Reader2["XCoord"];
+                            float test2 = (float)Reader2["YCoord"];
 
-
-
+                            coords.Add(test);
+                            coords.Add(test2);
                             
+
+
+                            //coords.Add((float)Reader2["XCoord"]);
+                            //coords.Add((float)Reader2["YCoord"]);
                         }
                         Reader2.Close();
                     }
                     cnn2.Close();
-
-
                 }
-
+            }
+            catch(ArgumentException e)
+            {
+                MessageBox.Show(e.ToString());
+            }
 
                 InitializeComponent();
                 map.MapProvider = GMapProviders.GoogleMap;
@@ -75,12 +82,19 @@ namespace LoginSystem
                 map.DragButton = MouseButtons.Left;
 
             // Plot Marker
-            
-           
-            foreach (float x in xcoords) {
-                MessageBox.Show(x.ToString());
-                
-                    PointLatLng point = new PointLatLng(y, x);
+            for (int i = 0; i < coords.Count(); i++) {
+
+                if(i % 2==0)
+                {
+                    x = (float)coords[i];
+                }
+                else if (i % 2 == 1)
+                {
+                    y = (float)coords[i];
+                    //test
+                   
+                    //puts point on the map with lat long as x and y
+                    PointLatLng point = new PointLatLng(x,y);
                     // Put Sql Statement to select :)
                     GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
                     // Create Overlay
@@ -90,12 +104,15 @@ namespace LoginSystem
 
                     // Cover map
                     map.Overlays.Add(markers);
+                }
                 
                 
 
             }
             
         }
+
+        
 
         // So you can move the form around
         private bool mouseDown;
@@ -134,8 +151,13 @@ namespace LoginSystem
         private void home_Load(object sender, EventArgs e)
         {
             
-            label3.Text ="Welcome, " + CurrentUser + "! X= Y= " + y;
+            label3.Text ="Welcome, " + CurrentUser;
            
+        }
+
+        private void map_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+            MessageBox.Show(String.Format("Marker {0} was clicked.", item.Tag));
         }
 
         private void Exit_Click(object sender, EventArgs e)
