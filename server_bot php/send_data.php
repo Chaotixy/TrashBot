@@ -1,6 +1,6 @@
 <?php 
 $serverName = "serverName";
-$options = array(  "UID" => "sa",  "PWD" => "Password",  "Database" => "DBname");
+$options = array(  "UID" => "Robot",  "PWD" => "Test123",  "Database" => "Trashbot");
 $conn = sqlsrv_connect($serverName, $options);
 
 if( $conn === false )

@@ -1,7 +1,7 @@
-//#ifndef __CREDENTIALS_H__
-//#define __CREDENTIALS_H__
-//char passphrase[] = "pass_WIFI"; //password Wi-Fi
-//char ssid[] = "name_WIFI"; //name Wi-Fi
+#ifndef __CREDENTIALS_H__
+#define __CREDENTIALS_H__
+char passphrase[] = "pass_WIFI"; //password Wi-Fi
+char ssid[] = "name_WIFI"; //name Wi-Fi
 
 #include "MPU6050_tockn.h"
 #include <SPI.h>
@@ -25,6 +25,8 @@ int speed;
 
 long duration;
 long distance;
+
+float timer;
  
 
 float var1 = 19.5;    // caliberation factor
@@ -67,8 +69,8 @@ void forward() {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN1, LOW);
 
-  analogWrite(IN4, 70);
-  analogWrite(IN2, 70);
+  analogWrite(IN4, 10);
+  analogWrite(IN2, 10);
 }
 // Make the Wheels move Left
 void left() {
@@ -109,7 +111,10 @@ void breaks() {
 }
 
 void loop() {
-
+  timer = millis();
+  while(timer > 10000){
+  forward();
+  }
 
 //Flexi Force ------- Calculate the weight
 
@@ -121,7 +126,7 @@ weight = weight * 100;
 //send weight to server
 if (client.connect()) {
     client.print("GET /write_data.php?");
-    client.print("value="); 
+    client.print("weight="); 
     client.print(weight);
     client.println(" HTTP/1.1"); // Part of the GET request
     client.println("Host: 81.169.200.100,1433");
@@ -154,11 +159,13 @@ delay(10000);
    if (distance >= 0 && distance <= 6.5){
     //bin full
      bin_state = "Full";
+
+   }
 	
 //	send bin state to server
 	if (client.connect()) {
 		client.print("GET /write_data.php?");
-		client.print("value="); 
+		client.print("bin_state="); 
 		client.print(bin_state);
 		client.println(" HTTP/1.1"); // Part of the GET request
     client.println("Host: 81.169.200.100,1433");
