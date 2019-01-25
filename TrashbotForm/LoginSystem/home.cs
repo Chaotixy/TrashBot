@@ -160,6 +160,13 @@ namespace LoginSystem
             MessageBox.Show(String.Format("Marker {0} was clicked.", item.Tag));
         }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = new Login();
+            login.Show();
+        }
+
         private void Exit_Click(object sender, EventArgs e)
         {
 

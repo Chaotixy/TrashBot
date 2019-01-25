@@ -1,23 +1,39 @@
+//Connection to a wifi network is initialized here.
+
 #ifndef __CREDENTIALS_H__
 #define __CREDENTIALS_H__
 char passphrase[] = "pass_WIFI"; //password Wi-Fi
 char ssid[] = "name_WIFI"; //name Wi-Fi
 
+//Definition of all the libraries are done here.
+
 #include "MPU6050_tockn.h"
 #include <SPI.h>
 #include <SoftwareSerial.h>
-#include <Wire.h>
-#include "WiFly.h"
 
-#define trigPin1 13
-#define echoPin1 12
-#define trigPin2 11
-#define echoPin2 10
+//Server connection
 
-int IN4 = 3;
+byte server[] = { 66, 249, 89, 104 };
+
+WiFlyClient client("", 80);
+
+//Definitions of all the right pins
+
+#define trigPin1 13 //First Ultrasonic sensor in front of the robot
+#define echoPin1 12 //First Ultrasonic sensor in front of the robot
+#define trigPin2 11 //Second Ultrasonic sensor Inside the bin
+#define echoPin2 10 //Second Ultrasonic sensor Inside the bin
+
+//Motor driver pin definitions ******
+
+int IN4 = 3; 
 int IN3 = 2;
 int IN2 = 5;
 int IN1 = 4;
+
+//*******
+
+//Definition of some of the Variables used
 
 int state; //state of the loop
 int line;
@@ -29,7 +45,7 @@ long distance;
 float timer;
  
 
-float var1 = 19.5;    // caliberation factor
+float var1 = 19.5;    // caliberation factor for FlexiForce
 
 int var2 = A0;  // FlexiForce sensor is connected analog pin A0 of arduino 
 
@@ -41,7 +57,30 @@ String bin_state; //This is the Status of the bin IF full or NOt
 
 //Setup
 void setup() {
-line = 0;
+  
+WiFly.begin(); //Start the Wifly
+
+//Establishing the WIFI connection****
+
+//Check if connection was successful
+if (!WiFly.join(ssid, passphrase)) {
+    Serial.println("Association failed.");
+    while (1) {
+      // Hang on failure.
+    }
+  }  
+
+  Serial.println("connecting...");
+
+  if (client.connect()) {
+    Serial.println("connected");
+    client.println("GET /search?q=arduino HTTP/1.0");
+    client.println();
+  } else {
+    Serial.println("connection failed");
+  }
+  
+}
 
 pinMode(var2, INPUT); //Flexi force
 Serial.begin (9600);
@@ -52,12 +91,11 @@ pinMode(echoPin1, INPUT);
 pinMode(trigPin2, OUTPUT); //ultrasonic sound sensor2
 pinMode(echoPin2, INPUT);
 
-pinMode(IN4, OUTPUT);
+pinMode(IN4, OUTPUT); //Motor Drivers
 pinMode(IN3, OUTPUT);
 pinMode(IN2, OUTPUT);
 pinMode(IN1, OUTPUT);
 
-WiFly.begin();
 
 }
 
@@ -69,8 +107,10 @@ void forward() {
   digitalWrite(IN2, HIGH);
   digitalWrite(IN1, LOW);
 
-  analogWrite(IN4, 10);
-  analogWrite(IN2, 10);
+  analogWrite(IN4, 70);
+  analogWrite(IN2, 70);
+  analogWrite(IN3, 70);
+  analogWrite(IN1, 70);
 }
 // Make the Wheels move Left
 void left() {
@@ -81,6 +121,8 @@ void left() {
 
   analogWrite(IN4, 70);
   analogWrite(IN2, 70);
+  analogWrite(IN3, 70);
+  analogWrite(IN1, 70);
 }
 // Make the wheels move right
 void right() {
@@ -91,18 +133,22 @@ void right() {
 
   analogWrite(IN4, 70);
   analogWrite(IN2, 70);
+  analogWrite(IN3, 70);
+  analogWrite(IN1, 70);;
 }
-
+// Make the Wheels reverse
 void backwards() {
   digitalWrite(IN4, LOW);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN1, HIGH);
 
-  analogWrite(IN4, 70);
-  analogWrite(IN2, 70);
+  analogWrite(IN4, 50);
+  analogWrite(IN2, 50);
+  analogWrite(IN3, 50);
+  analogWrite(IN1, 50);
 }
-
+// Make the Wheels break
 void breaks() {
   digitalWrite(IN4, LOW);
   digitalWrite(IN3, LOW);
@@ -111,11 +157,6 @@ void breaks() {
 }
 
 void loop() {
-  timer = millis();
-  while(timer > 10000){
-  forward();
-  }
-
 //Flexi Force ------- Calculate the weight
 
 var3 = analogRead(var2);
@@ -124,6 +165,7 @@ weight = weight * var1;
 weight = weight * 100;
 
 //send weight to server
+
 if (client.connect()) {
     client.print("GET /write_data.php?");
     client.print("weight="); 
@@ -134,12 +176,7 @@ if (client.connect()) {
     client.println(); //empty line
     client.stop(); //Closing connection to the server
 }
-else {
-     If Arduino can't connect to the server 
-    Serial.println("--> connection failed\n");
-    }
-
-delay(10000);
+delay(10000); //Delay to let the server process the input
 
 //if full or not ----- Ultrasonic sensor
 
@@ -152,17 +189,14 @@ delay(10000);
   digitalWrite(trigPin2, LOW);
   duration = pulseIn(echoPin2, HIGH);
   distance = (duration/2) / 29.1;
-
-  Serial.print("Distance: ");
-  Serial.println(distance);
-
-   if (distance >= 0 && distance <= 6.5){
+  
+  if (distance >= 0 && distance <= 6.5){
     //bin full
      bin_state = "Full";
-
-   }
-	
+    }
+   
 //	send bin state to server
+
 	if (client.connect()) {
 		client.print("GET /write_data.php?");
 		client.print("bin_state="); 
@@ -178,9 +212,9 @@ delay(10000);
 		Serial.println("--> connection failed\n");
 	}
 
-	 delay(10000);
+	 delay(10000); //Delay to let the server process the input
 	
-	//INSERT GYRO CODE HERE//
- 
-  // }
-}  
+//INSERT GYRO CODE HERE//
+
+  
+}
