@@ -14,6 +14,7 @@ This folder consists of:
 	*Bin_Ultrasonic_sensor
 	*Flexi-Force_code_snippet
 	*Motor_Drive
+	*MPU6050 test
 
 
 ----In this folder you can find the appropriate libraries 
